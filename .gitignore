@@ -14,5 +14,5 @@ venv/
 *.env
 
 # Ignore all migrations except the `__init__.py`
-migrations/**/*
-!migrations/**/__init__.py
+migrations/
+!migrations/__init__.py
