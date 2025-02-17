@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Appointment
+from .models import Appointment, Doctor
 
 # Register your models here.
 @admin.register(Appointment)
@@ -10,3 +10,10 @@ class AppointmentAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+    
+@admin.register(Doctor)
+class DoctorAdmin(admin.ModelAdmin):
+    list_display = ('name', 'position', 'is_featured')
+    list_editable = ('is_featured',)
+    search_fields = ('name', 'position')
+    list_filter = ('position',)
