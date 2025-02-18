@@ -2,8 +2,11 @@
 
 {% block content %}
     <section class="home-slider owl-carousel">
-      <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
+		{% load static %}
+		<!-- {% static 'clinic/images/bg_1.jpg' as bg_image %} -->
+		<!-- <div class="slider-item bread-item" style="background-image: url('{{ bg_image }}');" data-stellar-background-ratio="0.5"> -->
+		<div class="slider-item bread-item" style="background-image: url('{% static 'clinicapp/images/bg_1.jpg' %}');" data-stellar-background-ratio="0.5"></div>
+		<div class="overlay"></div>
         <div class="container" data-scrollax-parent="true">
           <div class="row slider-text align-items-end">
             <div class="col-md-7 col-sm-12 ftco-animate mb-5">
@@ -18,9 +21,9 @@
 		<section class="ftco-section">
     	<div class="container">
     		<div class="row d-md-flex">
-	    		<div class="col-md-6 ftco-animate img about-image order-md-last" style="background-image: url(images/about.jpg);">
-	    		</div>
-	    		<div class="col-md-6 ftco-animate pr-md-5 order-md-first">
+				{% load static %}
+				{% static 'clinic/images/about.jpg' as about_image %}
+	    		<div class="col-md-6 ftco-animate img about-image order-md-last" style="background-image: url('{% static 'clinicapp/images/abt.jpg' %}'); width: 200px;" ></div><div class="col-md-6 ftco-animate pr-md-5 order-md-first">
 		    		<div class="row">
 		          <div class="col-md-12 nav-link-wrap mb-5">
 		            <div class="nav ftco-animate nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
