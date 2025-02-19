@@ -2,7 +2,8 @@
 
 {% block content %}
     <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url('images/bg_1.jpg');">
+		{% load static %}
+      <div class="slider-item" style="background-image: url({% static 'clinicapp/images/h3.jpg' %});">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center" data-scrollax-parent="true">
@@ -15,7 +16,7 @@
         </div>
       </div>
 
-      <div class="slider-item" style="background-image: url('images/bg_2.jpg');">
+      <div class="slider-item" style="background-image: url({% static 'clinicapp/images/h1.jpg' %});">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center" data-scrollax-parent="true">
@@ -170,7 +171,7 @@
       </div>
       <div class="container-wrap mt-5">
       	<div class="row d-flex no-gutters">
-      		<div class="col-md-6 img" style="background-image: url(images/about-2.jpg);">
+      		<div class="col-md-6 img" style="background-image: url({% static 'clinicapp/images/h4.jpg' %});">
       		</div>
       		<div class="col-md-6 d-flex">
       			<div class="about-wrap">
@@ -223,7 +224,7 @@
         <div class="row">
         	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
-      				<div class="img mb-4" style="background-image: url(images/person_5.jpg);"></div>
+      				<div class="img mb-4" style="background-image: url({% static 'clinicapp/images/p2.jpg' %});"></div>
       				<div class="info text-center">
       					<h3><a href="teacher-single.html">Tom Smith</a></h3>
       					<span class="position">Dentist</span>
@@ -241,7 +242,7 @@
         	</div>
         	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
-      				<div class="img mb-4" style="background-image: url(images/person_6.jpg);"></div>
+      				<div class="img mb-4" style="background-image: url({% static 'clinicapp/images/p1.jpg' %});"></div>
       				<div class="info text-center">
       					<h3><a href="teacher-single.html">Mark Wilson</a></h3>
       					<span class="position">Dentist</span>
@@ -464,7 +465,7 @@
             <div class="carousel-testimony owl-carousel ftco-owl">
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+                  <div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p5.jpg' %})">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
@@ -478,7 +479,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_2.jpg)">
+                  <div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p6.jpg' %})">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
@@ -492,7 +493,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_3.jpg)">
+                  <div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p4.jpg' %})">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
@@ -506,7 +507,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+                  <div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p2.jpg' %})">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
@@ -520,7 +521,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+                  <div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p1.jpg' %})">
                     <span class="quote d-flex align-items-center justify-content-center">
                       <i class="icon-quote-left"></i>
                     </span>
