@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
 from .forms import AppointmentForm
+from .models import Doctor
 
 def book_appointment(request):
     if request.method == "POST":
@@ -41,7 +42,11 @@ def book_appointment(request):
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html', {})
+    featured_doctors = Doctor.objects.filter(is_featured=True)[:4]
+    context = {
+        'featured_doctors': featured_doctors,
+    }
+    return render(request, 'home.html', context)
 
 def about(request):
     return render(request, 'about.html', {})
@@ -50,7 +55,8 @@ def services(request):
     return render(request, 'services.html', {})
 
 def doctors(request):
-    return render(request, 'doctors.html', {})
+    doctors = Doctor.objects.all()
+    return render(request, 'doctors.html', {'doctors': doctors})
 
 def contact(request):
     return render(request, 'contact.html', {})
