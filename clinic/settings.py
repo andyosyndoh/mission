@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_icxbh6fqcy**s_0(x2oyzy6q%8=60iedns4r5b_z$41*elgfm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['korumissionhospital.co.ke', 'www.korumissionhospital.co.ke']
 
 
 # Application definition
