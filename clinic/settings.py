@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_icxbh6fqcy**s_0(x2oyzy6q%8=60iedns4r5b_z$41*elgfm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','korumissionhospital.co.ke', 'www.korumissionhospital.co.ke']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','korumissionhospital.co.ke', 'www.korumissionhospital.co.ke']
 
 
 # Application definition
@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.context_processors.shared_context', # Register shared context
             ],
         },
     },

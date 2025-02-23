@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="home-slider owl-carousel">
+      <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container" data-scrollax-parent="true">
+          <div class="row slider-text align-items-end">
+            <div class="col-md-7 col-sm-12 ftco-animate mb-5">
+              <p class="breadcrumbs" data-scrollax=" properties: { translateY: '70%', opacity: 1.6}"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
+              <h1 class="mb-3" data-scrollax=" properties: { translateY: '70%', opacity: .9}">Read Our Blog</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+		
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="row">
+              {% for post in posts %}
+							<div class="col-md-12 ftco-animate">
+		            <div class="blog-entry">
+		              <a href="{{ post.get_absolute_url }}" class="block-20" style="background-image: url('{{ post.image.url }}');">
+		              </a>
+		              <div class="text d-flex py-4">
+		                <div class="meta mb-3">
+		                  <div><a href="#">{{ post.publish_date|date:"M. d, Y" }}</a></div>
+		                  <div><a href="#">{{ post.author }}</a></div>
+		                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+		                </div>
+		                <div class="desc pl-sm-3 pl-md-5">
+			                <h3 class="heading"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+			                <p>{{ post.content|truncatewords:30 }}</p>
+			                <p><a href="blog-single.html" class="btn btn-primary btn-outline-primary">Read more</a></p>
+			              </div>
+		              </div>
+		            </div>
+		          </div>
+              {% endfor %}
+						</div>
+						<div class="row mt-5">
+		          <div class="col">
+		            <div class="block-27">
+		              <ul>
+                    {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                    {% endif %}
+        
+                    {% for num in page_obj.paginator.page_range %}
+                    <li class="{% if page_obj.number == num %}active{% endif %}">
+                      <a href="?page={{ num }}"><span>{{ num }}</span></a>
+                    </li>
+                    {% endfor %}
+        
+                    {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                    {% endif %}
+		              </ul>
+		            </div>
+		          </div>
+		        </div>
+					</div> <!-- END: col-md-8 -->
+					<div class="col-md-4 sidebar ftco-animate">
+            <div class="sidebar-box">
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <span class="icon fa fa-search"></span>
+                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                </div>
+              </form>
+            </div>
+            <div class="sidebar-box ftco-animate">
+              <div class="categories">
+                <h3>Categories</h3>
+                {% for category in categories %}
+                <li><a href="#">{{ category.name }} <span>({{ category.post_count }})</span></a></li>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3>Recent Blog</h3>
+              {% for recent_post in recent_posts %}
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url({{ recent_post.image.url }});"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+            <div class="sidebar-box ftco-animate">
+              <h3>Tag Cloud</h3>
+              <div class="tagcloud">
+                <a href="#" class="tag-cloud-link">dish</a>
+                <a href="#" class="tag-cloud-link">menu</a>
+                <a href="#" class="tag-cloud-link">food</a>
+                <a href="#" class="tag-cloud-link">sweet</a>
+                <a href="#" class="tag-cloud-link">tasty</a>
+                <a href="#" class="tag-cloud-link">delicious</a>
+                <a href="#" class="tag-cloud-link">desserts</a>
+                <a href="#" class="tag-cloud-link">drinks</a>
+              </div>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3>Paragraph</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+            </div>
+          </div>
+				</div>
+			</div>
+		</section>
+{% endblock %}    
