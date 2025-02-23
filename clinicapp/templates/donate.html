@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'static/clinicapp/style.css' %}">
+
+<div class="container my-5">
+    <h2>Make a Donation</h2>
+    <div class="row">
+        <!-- Payment Method Selection -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Choose Payment Method</h5>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="bankTransfer" value="bank" checked>
+                        <label class="form-check-label" for="bankTransfer">
+                            International Bank Transfer
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="mpesa" value="mpesa">
+                        <label class="form-check-label" for="mpesa">
+                            M-Pesa
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bank Transfer Form -->
+        <div class="col-md-8" id="bankTransferForm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Bank Transfer Details</h5>
+                    <form id="bankDonationForm">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Get Bank Details</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- M-Pesa Form -->
+        <div class="col-md-8" id="mpesaForm" style="display: none;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">M-Pesa Payment</h5>
+                    <form id="mpesaDonationForm">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="mpesaName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="mpesaName" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Pay with M-Pesa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'donations/donate.js' %}"></script>
+{% endblock %}
