@@ -7,7 +7,7 @@ from .models import Post, Category, Tag
 
 class PostListView(ListView):
     model = Post
-    template_name = 'blog/blog.html'
+    template_name = 'blog.html'
     context_object_name = 'posts'
     paginate_by = 6  # Matches template's 6 posts per page
 
@@ -23,5 +23,5 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
-    template_name = 'blog/blog-single.html'
+    template_name = 'blog-single.html'
     context_object_name = 'post_detail'
