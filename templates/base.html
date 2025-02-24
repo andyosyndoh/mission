@@ -23,6 +23,93 @@
     <link rel="stylesheet" href="{% static 'clinicapp/css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'clinicapp/css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'clinicapp/css/style.css' %}">
+
+    <style>
+
+/* Button Styling */
+#whatsappButton {
+    background-color: #25D366; /* WhatsApp green */
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* WhatsApp Icon */
+#whatsappButton i {
+    font-size: 20px;
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+}
+
+.modal-content {
+    background-color: rgb(250, 246, 246);
+    /* margin: 15% auto; */
+    padding: 20px;
+    /* width: 80%; */
+    max-width: 400px;
+    border-radius: 20px;
+    text-align: center;
+    
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50px;
+    position: fixed;
+    bottom: 80px; /* Adjusted to be above WhatsApp button */
+    right: 20px;
+    z-index: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.close {
+    color: #0c0c0c;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+#startChatButton {
+    background-color: #25D366;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+    </style>
   </head>
   <body>
     
@@ -174,6 +261,22 @@
         </div>
       </div>
     </div>
+
+     <!-- WhatsApp Floating Button -->
+<button id="whatsappButton">
+  <i class="icon-whatsapp"></i> WhatsApp
+</button>
+
+     <!-- Popup Modal -->
+     <div id="whatsappPopup" class="modal">
+         <div class="modal-content">
+             <span class="close">&times;</span>
+             <p>Welcome to The Koru Mission Hospital.</p>
+             <p>We Reply within 24 Hours.</p><br><br>
+             <p>Thank You For Contacting Us</p>
+             <button id="startChatButton">Start Chat</button>
+         </div>
+     </div>
   
   
     <script src="{% static 'clinicapp/js/jquery.min.js' %}"></script>
@@ -211,6 +314,69 @@
         }
     });
 });
+    </script>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get elements
+    const whatsappButton = document.getElementById('whatsappButton');
+    const whatsappPopup = document.getElementById('whatsappPopup');
+    const closeButton = document.querySelector('.close');
+    const startChatButton = document.getElementById('startChatButton');
+
+    // Open popup when WhatsApp button is clicked
+    if (whatsappButton) {
+        whatsappButton.addEventListener('click', () => {
+            whatsappPopup.style.display = 'block';
+        });
+    }
+
+    // Close popup when close button is clicked
+    if (closeButton) {
+        closeButton.addEventListener('click', () => {
+            whatsappPopup.style.display = 'none';
+        });
+    }
+
+    // Redirect to WhatsApp Web when Start Chat button is clicked
+    if (startChatButton) {
+        startChatButton.addEventListener('click', () => {
+            const phoneNumber = '254798681754'; // WhatsApp number
+            const message = 'Hello, I would like to chat with The Koru Mission Hospital.';
+            
+            // Detect if user is on mobile or desktop
+            const isMobile = /iPhone|Android|iPad/i.test(navigator.userAgent);
+            let whatsappUrl;
+
+            if (isMobile) {
+                // Use mobile-friendly WhatsApp link
+                whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            } else {
+                // Use direct WhatsApp Web link for desktop users
+                whatsappUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+            }
+
+            // Open WhatsApp chat in a new tab
+            const newTab = window.open(whatsappUrl, '_blank');
+
+            // If popup is blocked, open in the same tab
+            if (!newTab) {
+                window.location.href = whatsappUrl;
+            }
+
+            // Close popup after redirecting
+            whatsappPopup.style.display = 'none';
+        });
+    }
+
+    // Close popup if user clicks outside the modal
+    window.addEventListener('click', (event) => {
+        if (event.target === whatsappPopup) {
+            whatsappPopup.style.display = 'none';
+        }
+    });
+});
+
     </script>
       
     </body>
