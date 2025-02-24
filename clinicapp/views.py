@@ -1,13 +1,39 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import json
 from .forms import AppointmentForm
-from .models import Doctor, Donation
+from .models import Doctor
+import requests
+# import stripe
+# import datetime
+from .mpesa_api import stk_push
 
+
+def initiate_payment(request):
+    phone_number = request.GET.get("phone")
+    amount = request.GET.get("amount")
+
+    if not phone_number or not amount:
+        return JsonResponse({"error": "Phone number and amount are required"}, status=400)
+
+    response = stk_push(phone_number, int(amount))
+
+    return JsonResponse(response)
+
+def donation_view(request):
+    if request.method == 'POST':
+        # Process the donation form here
+        # e.g. read form data, save to DB, redirect or render success page
+        # ...
+        return redirect('home')  # or wherever you want to go after submission
+    else:
+        # If someone visits /donation/ via GET, just show a simple page or redirect
+        return render(request, 'some_template.html')
+    
 # Existing Views
 def book_appointment(request):
     if request.method == "POST":
@@ -64,54 +90,3 @@ def doctors(request):
 
 def contact(request):
     return render(request, 'contact.html', {})
-
-# Donation App Views
-# def donation_page(request):
-#     return render(request, 'donations/donate.html')
-
-# @csrf_exempt
-# def process_mpesa_donation(request):
-#     if request.method == 'POST':
-#         try:
-#             data = json.loads(request.body)
-#             donation = Donation.objects.create(
-#                 amount=data.get('amount'),
-#                 payment_method='MPESA',
-#                 donor_name=data.get('name'),
-#                 donor_email=data.get('email', ''),
-#                 donor_country='Kenya'
-#             )
-#             # Simulate M-Pesa API call
-#             return JsonResponse({'status': 'success', 'message': 'M-Pesa payment initiated'})
-#         except Exception as e:
-#             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
-
-# @csrf_exempt
-# def process_bank_donation(request):
-#     if request.method == 'POST':
-#         try:
-#             data = json.loads(request.body)
-#             donation = Donation.objects.create(
-#                 amount=data.get('amount'),
-#                 currency=data.get('currency'),
-#                 payment_method='BANK',
-#                 donor_name=data.get('name'),
-#                 donor_email=data.get('email'),
-#                 donor_country=data.get('country')
-#             )
-#             # Send email with bank details
-#             send_mail(
-#                 'Your Donation Bank Details',
-#                 f'Here are the bank details for your donation:\n\n'
-#                 f'Bank Name: {settings.HOSPITAL_BANK_NAME}\n'
-#                 f'Account Name: {settings.HOSPITAL_ACCOUNT_NAME}\n'
-#                 f'Account Number: {settings.HOSPITAL_ACCOUNT_NUMBER}\n'
-#                 f'Swift Code: {settings.HOSPITAL_SWIFT_CODE}\n'
-#                 f'Reference: DON{donation.id}',
-#                 settings.DEFAULT_FROM_EMAIL,
-#                 [data.get('email')],
-#                 fail_silently=False,
-#             )
-#             return JsonResponse({'status': 'success'})
-#         except Exception as e:
-#             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)

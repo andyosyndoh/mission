@@ -41,7 +41,7 @@
 	          <li class="nav-item"><a href="{% url 'doctors' %}" class="nav-link">Doctors</a></li>
 	          <li class="nav-item"><a href="{% url 'blog:blog_home' %}" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta"><a href="{% url 'contact' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Make an Appointment</span></a></li>
+	          <li class="nav-item cta"><a href="{% url 'contact' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Donate</span></a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -138,52 +138,101 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalRequestLabel">Make an Appointment</h5>
+            <h5 class="modal-title" id="modalRequestLabel">Make a Donation</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form action="{% url 'appointment' %}" method="POST">
-                {% csrf_token %}
+            <form action="{% url 'donation' %}" method="POST">
+              {% csrf_token %}
               <div class="form-group">
-                <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
                 <input type="text" class="form-control" name="full_name" placeholder="Full Name" required>
               </div>
               <div class="form-group">
-                <!-- <label for="appointment_email" class="text-black">Email</label> -->
-                <input type="text" class="form-control" name="email" placeholder="Email" required>
+                <input type="email" class="form-control" name="email" placeholder="Email" required>
               </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <!-- <label for="appointment_date" class="text-black">Date</label> -->
-                    <input type="date" class="form-control" name="date" required>
-                  </div>    
+              
+              <!-- Donation Amount -->
+              <div class="form-group">
+                <label for="donation_amount" class="text-black">Donation Amount</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <select class="form-control" name="currency" id="currency">
+                      <option value="KES">KES</option>
+                      <option value="USD">USD</option>
+                      <option value="EUR">EUR</option>
+                      <option value="GBP">GBP</option>
+                    </select>
+                  </div>
+                  <input type="number" class="form-control" name="amount" placeholder="Amount" min="1" required>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <!-- <label for="appointment_time" class="text-black">Time</label> -->
-                    <input type="time" class="form-control" name="time" required>
+              </div>
+
+              <!-- Payment Method Selection -->
+              <div class="form-group">
+                <label for="payment_method" class="text-black">Payment Method</label>
+                <select class="form-control" name="payment_method" id="payment_method" required>
+                  <option value="">Select Payment Method</option>
+                  <option value="mpesa">M-Pesa</option>
+                  <option value="card">Credit/Debit Card</option>
+                  <option value="paypal">PayPal</option>
+                </select>
+              </div>
+
+              <!-- M-Pesa Fields (shown/hidden based on selection) -->
+              <div class="payment-fields mpesa-fields" style="display: none;">
+                <div class="form-group">
+                  <label for="phone_number" class="text-black">M-Pesa Phone Number</label>
+                  <input type="tel" class="form-control" name="phone_number" placeholder="e.g. 07XXXXXXXX" pattern="^0[0-9]{9}$">
+                  <small class="form-text text-muted">Enter your phone number in the format 07XXXXXXXX</small>
+                </div>
+              </div>
+
+              <!-- Credit Card Fields (shown/hidden based on selection) -->
+              <div class="payment-fields card-fields" style="display: none;">
+                <div class="form-group">
+                  <label for="card_number" class="text-black">Card Number</label>
+                  <input type="text" class="form-control" name="card_number" placeholder="XXXX XXXX XXXX XXXX">
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="expiry_date" class="text-black">Expiry Date</label>
+                      <input type="text" class="form-control" name="expiry_date" placeholder="MM/YY">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="cvv" class="text-black">CVV</label>
+                      <input type="text" class="form-control" name="cvv" placeholder="XXX">
+                    </div>
                   </div>
                 </div>
               </div>
-              
-  
-              <div class="form-group">
-                <!-- <label for="appointment_message" class="text-black">Message</label> -->
-                <textarea class="form-control" name="message" cols="30" rows="10" placeholder="Message"></textarea>
+
+              <!-- PayPal notice -->
+              <div class="payment-fields paypal-fields" style="display: none;">
+                <div class="alert alert-info">
+                  You will be redirected to PayPal to complete your donation after submitting this form.
+                </div>
               </div>
-              <div class="form-group">
-                <input type="submit" value="Make an Appointment" class="btn btn-primary">
+              
+              <div class="form-group mt-4">
+                <input type="submit" value="Proceed to Payment" class="btn btn-primary btn-block">
               </div>
             </form>
           </div>
           
+          <!-- Payment Security Notice -->
+          <div class="modal-footer justify-content-center">
+            <small class="text-muted">
+              <i class="icon-lock mr-1"></i> All payments are secure and encrypted
+            </small>
+          </div>
         </div>
       </div>
     </div>
-  
   
     <script src="{% static 'clinicapp/js/jquery.min.js' %}"></script>
     <script src="{% static 'clinicapp/js/jquery-migrate-3.0.1.min.js' %}"></script>
@@ -204,23 +253,65 @@
     <script src="{% static 'clinicapp/js/main.js' %}"></script>
     <script>
       document.querySelectorAll('.read-more').forEach(button => {
-    button.addEventListener('click', function() {
-        const card = this.closest('.staff');
-        const bioShort = card.querySelector('.bio-short');
-        const bioFull = card.querySelector('.bio-full');
-        
-        if (bioShort.style.display === 'none') {
-            bioShort.style.display = 'block';
-            bioFull.style.display = 'none';
-            this.textContent = 'Read More';
-        } else {
-            bioShort.style.display = 'none';
-            bioFull.style.display = 'block';
-            this.textContent = 'Read Less';
-        }
-    });
-});
-    </script>
+        button.addEventListener('click', function() {
+            const card = this.closest('.staff');
+            const bioShort = card.querySelector('.bio-short');
+            const bioFull = card.querySelector('.bio-full');
+            
+            if (bioShort.style.display === 'none') {
+                bioShort.style.display = 'block';
+                bioFull.style.display = 'none';
+                this.textContent = 'Read More';
+            } else {
+                bioShort.style.display = 'none';
+                bioFull.style.display = 'block';
+                this.textContent = 'Read Less';
+            }
+        });
+      });
       
-    </body>
-  </html>
+      // Payment method toggle script
+      document.addEventListener('DOMContentLoaded', function() {
+        const paymentMethod = document.getElementById('payment_method');
+        const paymentFields = document.querySelectorAll('.payment-fields');
+        
+        paymentMethod.addEventListener('change', function() {
+          // Hide all payment fields first
+          paymentFields.forEach(field => {
+            field.style.display = 'none';
+          });
+          
+          // Show the selected payment field
+          const selectedMethod = this.value;
+          if (selectedMethod) {
+            document.querySelector(`.${selectedMethod}-fields`).style.display = 'block';
+          }
+        });
+
+        // Currency change handler
+        const currencySelect = document.getElementById('currency');
+        currencySelect.addEventListener('change', function() {
+          const selectedCurrency = this.value;
+          const paymentMethodSelect = document.getElementById('payment_method');
+          
+          // If KES is selected, enable M-Pesa, otherwise disable it
+          const mpesaOption = Array.from(paymentMethodSelect.options).find(option => option.value === 'mpesa');
+          
+          if (selectedCurrency === 'KES') {
+            mpesaOption.disabled = false;
+          } else {
+            mpesaOption.disabled = true;
+            // If M-Pesa was selected but currency is not KES, reset selection
+            if (paymentMethodSelect.value === 'mpesa') {
+              paymentMethodSelect.value = '';
+              // Hide all payment fields
+              paymentFields.forEach(field => {
+                field.style.display = 'none';
+              });
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Appointment, Doctor, Donation
+from .models import Appointment, Doctor
 
 # Register your models here.
 @admin.register(Appointment)
@@ -18,12 +18,3 @@ class DoctorAdmin(admin.ModelAdmin):
     search_fields = ('name', 'position')
     list_filter = ('position',)
 
-@admin.register(Donation)
-class DonationAdmin(admin.ModelAdmin):
-    list_display = ('donor_name', 'amount', 'currency', 'payment_method', 'status', 'created_at')
-    search_fields = ('donor_name', 'donor_email', 'transaction_id')
-    list_filter = ('payment_method', 'status', 'created_at')
-    readonly_fields = ('created_at', 'completed_at')
-
-    def has_add_permission(self, request):
-        return False  # Disable adding donations from the admin interface

@@ -1,0 +1,5 @@
+MPESA_CONSUMER_KEY = 'i0PJqabVrsW4L9ErTwRbpukGWRJoGeHOMamyGZMGYCBOy2A5'
+MPESA_CONSUMER_SECRET = 'KMJYD1CmBc0js4SAg0XyqsyOaYjyGRxKoH4qgiWAJfj69f0LqevAXuEA73WHYu97'
+MPESA_SHORTCODE = 'N/A' #Use your Paybill/Till Number
+MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2c2e1c37c938e6e9aa10f781d44d4f80'
+MPESA_CALLBACK_URL = 'https://korumissionhospital.com/mpesa/callback'
