@@ -5,6 +5,7 @@ import requests
 import base64
 import datetime
 
+
 # Get M-Pesa Access Token
 def get_access_token():
     url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
@@ -15,11 +16,11 @@ def get_access_token():
     if response.status_code == 200:
         return response.json()["access_token"]
     else:
+        print("Failed to get access token:", response.json())
         return None
     
 def stk_push(phone_number, amount):
     access_token = get_access_token()
-    
     if access_token is None:
         return {"error": "Failed to generate access token"}
 
@@ -48,4 +49,7 @@ def stk_push(phone_number, amount):
 
     response = requests.post(url, json=payload, headers=headers)
 
-    return response.json()
+    try:
+        return response.json()  # Ensure it returns a valid JSON response
+    except requests.exceptions.JSONDecodeError:
+        return {"error": "Invalid JSON response from M-Pesa"}

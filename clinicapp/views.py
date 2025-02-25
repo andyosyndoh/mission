@@ -13,16 +13,42 @@ import requests
 from .mpesa_api import stk_push
 
 
+# @csrf_exempt
 def initiate_payment(request):
-    phone_number = request.GET.get("phone")
-    amount = request.GET.get("amount")
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            phone_number = data.get('phone_number')
+            amount = data.get('amount')
 
-    if not phone_number or not amount:
-        return JsonResponse({"error": "Phone number and amount are required"}, status=400)
+            # Basic validation
+            if not phone_number or not amount:
+                return JsonResponse({'error': 'Phone number and amount are required'}, status=400)
 
-    response = stk_push(phone_number, int(amount))
+            if not phone_number.startswith('254'):
+                return JsonResponse({'error': 'Phone number must be in international format (254XXXXXXXXX)'}, status=400)
 
-    return JsonResponse(response)
+            try:
+                amount = int(float(amount))
+            except ValueError:
+                return JsonResponse({'error': 'Amount must be a valid number'}, status=400)
+
+            # Initiate STK push
+            response_data = stk_push(phone_number, amount)  # Ensure stk_push returns JSON
+            
+            if not isinstance(response_data, dict):  # Ensure it's a valid response
+                return JsonResponse({'error': 'Invalid response from STK push'}, status=500)
+
+            return JsonResponse({
+                'MerchantRequestID': response_data.get('MerchantRequestID', ''),
+                'CheckoutRequestID': response_data.get('CheckoutRequestID', ''),
+                'ResponseDescription': response_data.get('ResponseDescription', '')
+            })
+
+        except Exception as e:
+            return JsonResponse({'error': True, 'errorMessage': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Only POST method is allowed'}, status=405)
 
 def donation_view(request):
     if request.method == 'POST':

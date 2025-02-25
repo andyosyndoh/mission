@@ -181,13 +181,17 @@
               </div>
 
               <!-- M-Pesa Fields (shown/hidden based on selection) -->
-              <div class="payment-fields mpesa-fields" style="display: none;">
-                <div class="form-group">
-                  <label for="phone_number" class="text-black">M-Pesa Phone Number</label>
-                  <input type="tel" class="form-control" name="phone_number" placeholder="e.g. 07XXXXXXXX" pattern="^0[0-9]{9}$">
-                  <small class="form-text text-muted">Enter your phone number in the format 07XXXXXXXX</small>
-                </div>
-              </div>
+              <!-- Replace the existing M-Pesa phone number field with this for better validation -->
+<div class="payment-fields mpesa-fields" style="display: none;">
+  <div class="form-group">
+    <label for="phone_number" class="text-black">M-Pesa Phone Number</label>
+    <input type="tel" class="form-control" name="phone_number" placeholder="07XXXXXXXX" pattern="^0[0-9]{9}$" required>
+    <small class="form-text text-muted">Enter your phone number in the format 07XXXXXXXX</small>
+  </div>
+  <div class="alert alert-info">
+    <small>You will receive an M-Pesa STK push prompt on your phone to complete the payment.</small>
+  </div>
+</div>
 
               <!-- Credit Card Fields (shown/hidden based on selection) -->
               <div class="payment-fields card-fields" style="display: none;">
