@@ -20,45 +20,10 @@
 				<div class="row">
 					<div class="col-md-8 ftco-animate">
             <h2 class="mb-3">{{ post.title }}</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
             <p>
               {{ post.content|safe }}
               <img src="{{ post.image.url }}" alt="Post Image" class="img-fluid">
             </p>
-
-            <div class="pt-5 mt-5">
-              <h3 class="mb-5">{{ post.comments_count }} Comments</h3>
-              <ul class="comment-list">
-                {% for comment in comments %}
-                    {% include 'blog/comment.html' with comment=comment %}
-                {% endfor %}
-              </ul>
-              <!-- END comment-list -->
-              
-              <div class="comment-form-wrap pt-5">
-                <h3 class="mb-5">Leave a comment</h3>
-                <form method="post" action="{% url 'blog:add_comment' post.slug %}">
-                  {% csrf_token %}
-                  {{ comment_form.content }}
-		              <!-- <div class="form-group">
-		                <input type="text" class="form-control" placeholder="Your Name">
-		              </div>
-		              <div class="form-group">
-		                <input type="text" class="form-control" placeholder="Your Email">
-		              </div>
-		              <div class="form-group">
-		                <input type="text" class="form-control" placeholder="Subject">
-		              </div>
-		              <div class="form-group">
-		                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-		              </div> -->
-		              <div class="form-group mt-3">
-		                <input type="submit" value="Post Comment" class="btn btn-primary py-3 px-5">
-		              </div>
-		            </form>
-              </div>
-            </div>
-
           </div> <!-- .col-md-8 -->
 					<div class="col-md-4 sidebar ftco-animate">
             <div class="sidebar-box">
@@ -72,20 +37,19 @@
             <div class="sidebar-box ftco-animate">
               <div class="categories">
                 <h3>Categories</h3>
-                <li><a href="#">Food <span>(12)</span></a></li>
-                <li><a href="#">Dish <span>(22)</span></a></li>
-                <li><a href="#">Desserts <span>(37)</span></a></li>
-                <li><a href="#">Drinks <span>(42)</span></a></li>
-                <li><a href="#">Ocassion <span>(14)</span></a></li>
+                {% for category in categories %}
+                <li><a href="#">{{ category.name }} <span>({{ category.post_count }})</span></a></li>
+                {% endfor %}
               </div>
             </div>
 
             <div class="sidebar-box ftco-animate">
               <h3>Recent Blog</h3>
+              {% for recent_post in recent_posts %}
               <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                <a class="blog-img mr-4" style="background-image: url({{ recent_post.image.url }});"></a>
                 <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <h3 class="heading"><a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a></h3>
                   <div class="meta">
                     <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
                     <div><a href="#"><span class="icon-person"></span> Admin</a></div>
@@ -93,30 +57,8 @@
                   </div>
                 </div>
               </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+              {% endfor %}
+              
             <div class="sidebar-box ftco-animate">
               <h3>Tag Cloud</h3>
               <div class="tagcloud">
