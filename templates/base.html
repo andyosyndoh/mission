@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Koru Missioin</title>
+    <title>Koru Mission Hospital</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -10,13 +10,10 @@
 
     <link rel="stylesheet" href="{% static 'clinicapp/css/open-iconic-bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'clinicapp/css/animate.css' %}">
-
     <link rel="stylesheet" href="{% static 'clinicapp/css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'clinicapp/css/owl.theme.default.min.css' %}">
     <link rel="stylesheet" href="{% static 'clinicapp/css/magnific-popup.css' %}">
-    
     <link rel="stylesheet" href="{% static 'clinicapp/css/aos.css' %}">
-    
     <link rel="stylesheet" href="{% static 'clinicapp/css/ionicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'clinicapp/css/bootstrap-datepicker.css' %}">
     <link rel="stylesheet" href="{% static 'clinicapp/css/jquery.timepicker.css' %}">
@@ -25,90 +22,86 @@
     <link rel="stylesheet" href="{% static 'clinicapp/css/style.css' %}">
 
     <style>
+      /* WhatsApp Button Styling */
+      #whatsappButton {
+          background-color: #25D366; /* WhatsApp green */
+          color: white;
+          border: none;
+          padding: 8px 10px;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          border-radius: 50px;
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 1000;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+          display: flex;
+          align-items: center;
+          gap: 5px;
+      }
 
-/* Button Styling */
-#whatsappButton {
-    background-color: #25D366; /* WhatsApp green */
-    color: white;
-    border: none;
-    padding: 8px 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 50px;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
+      /* WhatsApp Icon */
+      #whatsappButton i {
+          font-size: 20px;
+      }
 
-/* WhatsApp Icon */
-#whatsappButton i {
-    font-size: 20px;
-}
+      /* WhatsApp Modal Styling */
+      .whatsapp-modal {
+          display: none; /* Hidden by default */
+          position: fixed;
+          z-index: 1001;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+      }
 
-/* Modal Styling */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1001;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
-}
+      .whatsapp-modal-content {
+          background-color: rgb(250, 246, 246);
+          padding: 20px;
+          max-width: 400px;
+          border-radius: 20px;
+          text-align: center;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          border-radius: 50px;
+          position: fixed;
+          bottom: 80px; /* Adjusted to be above WhatsApp button */
+          right: 20px;
+          z-index: 1000;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
 
-.modal-content {
-    background-color: rgb(250, 246, 246);
-    /* margin: 15% auto; */
-    padding: 20px;
-    /* width: 80%; */
-    max-width: 400px;
-    border-radius: 20px;
-    text-align: center;
-    
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 50px;
-    position: fixed;
-    bottom: 80px; /* Adjusted to be above WhatsApp button */
-    right: 20px;
-    z-index: 1000;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
+      .whatsapp-close {
+          color: #0c0c0c;
+          align-self: flex-end;
+          font-size: 28px;
+          font-weight: bold;
+          cursor: pointer;
+      }
 
-.close {
-    color: #0c0c0c;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
+      .whatsapp-close:hover {
+          color: black;
+      }
 
-.close:hover {
-    color: black;
-}
-
-#startChatButton {
-    background-color: #25D366;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-}
+      #startChatButton {
+          background-color: #25D366;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+          border-radius: 5px;
+          margin-top: 20px;
+      }
     </style>
   </head>
   <body>
@@ -128,7 +121,7 @@
 	          <li class="nav-item"><a href="{% url 'team' %}" class="nav-link">Our Team</a></li>
 	          <li class="nav-item"><a href="{% url 'blog:blog_home' %}" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta"><a href="{% url 'contact' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Make an Appointment</span></a></li>
+	          <li class="nav-item cta"><a href="#" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Make an Appointment</span></a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -169,7 +162,7 @@
                 <h2 class="ftco-heading-2">Recent Blog</h2>
                 {% for recent_post in recent_posts %}
                 <div class="block-21 mb-4 d-flex">
-                  <a class="blog-img mr-4" style="background-image: url({{ recent_post.image.url }});"></a>
+                  <a class="blog-img mr-4" style="background-image: url('{{ recent_post.image.url }}');"></a>
                   <div class="text">
                     <h3 class="heading"><a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a></h3>
                     <div class="meta">
@@ -197,21 +190,35 @@
           </div>
           <div class="row">
             <div class="col-md-12 text-center">
-  
               <p>
-    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Koru Mission Hospital
-    </p>
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Koru Mission Hospital
+              </p>
             </div>
           </div>
         </div>
       </footer>
       
-    
+    <!-- WhatsApp Floating Button -->
+    <button id="whatsappButton">
+      <i class="icon-whatsapp"></i> WhatsApp
+    </button>
+
+    <!-- WhatsApp Popup Modal -->
+    <div id="whatsappPopup" class="whatsapp-modal">
+      <div class="whatsapp-modal-content">
+        <span class="whatsapp-close">&times;</span>
+        <p>Welcome to The Koru Mission Hospital.</p>
+        <p>We Reply within 24 Hours.</p>
+        <br><br>
+        <p>Thank You For Contacting Us</p>
+        <button id="startChatButton">Start Chat</button>
+      </div>
+    </div>
   
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
   
-    <!-- Modal -->
+    <!-- Appointment Modal -->
     <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -223,33 +230,31 @@
           </div>
           <div class="modal-body">
             <form action="{% url 'appointment' %}" method="POST">
-                {% csrf_token %}
+              {% csrf_token %}
               <div class="form-group">
-                <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
-                <input type="text" class="form-control" name="full_name" placeholder="Full Name" required>
+                 <!-- <label for="appointment_name" class="text-black">Full Name</label> -->      
+                  <input type="text" class="form-control" name="full_name" placeholder="Full Name" required>
               </div>
               <div class="form-group">
-                <!-- <label for="appointment_email" class="text-black">Email</label> -->
+                 <!-- <label for="appointment_email" class="text-black">Email</label> -->
                 <input type="text" class="form-control" name="email" placeholder="Email" required>
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <!-- <label for="appointment_date" class="text-black">Date</label> -->
-                    <input type="date" class="form-control" name="date" required>
-                  </div>    
+  <!-- <label for="appointment_date" class="text-black">Date</label> -->                
+       <input type="date" class="form-control" name="date" required>   
+                     </div>    
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <!-- <label for="appointment_time" class="text-black">Time</label> -->
+  <!-- <label for="appointment_time" class="text-black">Time</label> -->
                     <input type="time" class="form-control" name="time" required>
                   </div>
                 </div>
               </div>
-              
-  
               <div class="form-group">
-                <!-- <label for="appointment_message" class="text-black">Message</label> -->
+<!-- <label for="appointment_message" class="text-black">Message</label> -->
                 <textarea class="form-control" name="message" cols="30" rows="10" placeholder="Message"></textarea>
               </div>
               <div class="form-group">
@@ -257,27 +262,9 @@
               </div>
             </form>
           </div>
-          
         </div>
       </div>
     </div>
-
-     <!-- WhatsApp Floating Button -->
-<button id="whatsappButton">
-  <i class="icon-whatsapp"></i> WhatsApp
-</button>
-
-     <!-- Popup Modal -->
-     <div id="whatsappPopup" class="modal">
-         <div class="modal-content">
-             <span class="close">&times;</span>
-             <p>Welcome to The Koru Mission Hospital.</p>
-             <p>We Reply within 24 Hours.</p><br><br>
-             <p>Thank You For Contacting Us</p>
-             <button id="startChatButton">Start Chat</button>
-         </div>
-     </div>
-  
   
     <script src="{% static 'clinicapp/js/jquery.min.js' %}"></script>
     <script src="{% static 'clinicapp/js/jquery-migrate-3.0.1.min.js' %}"></script>
@@ -296,51 +283,54 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="{% static 'clinicapp/js/google-map.js' %}"></script>
     <script src="{% static 'clinicapp/js/main.js' %}"></script>
+    
+    <!-- Script for "Read More" functionality -->
     <script>
       document.querySelectorAll('.read-more').forEach(button => {
-    button.addEventListener('click', function() {
-        const card = this.closest('.staff');
-        const bioShort = card.querySelector('.bio-short');
-        const bioFull = card.querySelector('.bio-full');
-        
-        if (bioShort.style.display === 'none') {
+        button.addEventListener('click', function() {
+          const card = this.closest('.staff');
+          const bioShort = card.querySelector('.bio-short');
+          const bioFull = card.querySelector('.bio-full');
+          
+          if (bioShort.style.display === 'none') {
             bioShort.style.display = 'block';
             bioFull.style.display = 'none';
             this.textContent = 'Read More';
-        } else {
+          } else {
             bioShort.style.display = 'none';
             bioFull.style.display = 'block';
             this.textContent = 'Read Less';
-        }
-    });
-});
+          }
+        });
+      });
     </script>
-
+    
+    <!-- Script for WhatsApp functionality -->
     <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Get elements
-    const whatsappButton = document.getElementById('whatsappButton');
-    const whatsappPopup = document.getElementById('whatsappPopup');
-    const closeButton = document.querySelector('.close');
-    const startChatButton = document.getElementById('startChatButton');
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get elements
+        const whatsappButton = document.getElementById('whatsappButton');
+        const whatsappPopup = document.getElementById('whatsappPopup');
+        const closeButton = document.querySelector('.whatsapp-close');
+        const startChatButton = document.getElementById('startChatButton');
 
-    // Open popup when WhatsApp button is clicked
-    if (whatsappButton) {
-        whatsappButton.addEventListener('click', () => {
+        // Open popup when WhatsApp button is clicked
+        if (whatsappButton) {
+          whatsappButton.addEventListener('click', () => {
             whatsappPopup.style.display = 'block';
-        });
-    }
+          });
+        }
 
-    // Close popup when close button is clicked
-    if (closeButton) {
-        closeButton.addEventListener('click', () => {
+        // Close popup when close button is clicked
+        if (closeButton) {
+          closeButton.addEventListener('click', () => {
             whatsappPopup.style.display = 'none';
-        });
-    }
+          });
+        }
 
-    // Redirect to WhatsApp Web when Start Chat button is clicked
-    if (startChatButton) {
-        startChatButton.addEventListener('click', () => {
+        // Redirect to WhatsApp Web when Start Chat button is clicked
+        if (startChatButton) {
+          startChatButton.addEventListener('click', () => {
             const phoneNumber = '254798681754'; // WhatsApp number
             const message = 'Hello, I would like to chat with The Koru Mission Hospital.';
             
@@ -349,11 +339,11 @@
             let whatsappUrl;
 
             if (isMobile) {
-                // Use mobile-friendly WhatsApp link
-                whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+              // Use mobile-friendly WhatsApp link
+              whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             } else {
-                // Use direct WhatsApp Web link for desktop users
-                whatsappUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+              // Use direct WhatsApp Web link for desktop users
+              whatsappUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
             }
 
             // Open WhatsApp chat in a new tab
@@ -361,23 +351,21 @@
 
             // If popup is blocked, open in the same tab
             if (!newTab) {
-                window.location.href = whatsappUrl;
+              window.location.href = whatsappUrl;
             }
 
             // Close popup after redirecting
             whatsappPopup.style.display = 'none';
-        });
-    }
-
-    // Close popup if user clicks outside the modal
-    window.addEventListener('click', (event) => {
-        if (event.target === whatsappPopup) {
-            whatsappPopup.style.display = 'none';
+          });
         }
-    });
-});
 
+        // Close popup if user clicks outside the modal
+        window.addEventListener('click', (event) => {
+          if (event.target === whatsappPopup) {
+            whatsappPopup.style.display = 'none';
+          }
+        });
+      });
     </script>
-      
-    </body>
-  </html>
+  </body>
+</html>
