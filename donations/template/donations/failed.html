@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="mt-5">Payment Failed</h1>
+    <p class="lead">There was an issue processing your donation. Please try again.</p>
+    <p>If the problem persists, please contact support.</p>
+    <a href="{% url 'donation_form' %}" class="btn btn-primary">Try Again</a>
+  </div>
+{% endblock %}
