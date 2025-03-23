@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'clinicapp.apps.ClinicappConfig',
     'blog.apps.BlogConfig',
+    'donations',
 ]
 
 MIDDLEWARE = [
