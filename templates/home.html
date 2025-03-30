@@ -670,12 +670,13 @@
     <div class="row justify-content-center ftco-animate">
       <div class="col-md-8">
         <div class="carousel-testimony owl-carousel ftco-owl">
+          {% for testimonial in testimonials %}
           <div class="item">
             <div class="testimony-wrap p-4 pb-5">
               <div
                 class="user-img mb-5"
                 style="
-                  background-image: url({% static 'clinicapp/images/p5.jpg' %});
+                  background-image: url({{ testimonial.image.url }});
                 "
               >
                 <span
@@ -686,112 +687,14 @@
               </div>
               <div class="text text-center">
                 <p class="mb-5">
-                  Koru Mission Hospital has been a blessing to my family. The
-                  care and attention we received were exceptional. The doctors
-                  and staff went above and beyond to make us feel comfortable
-                  and supported. Thank you for your dedication and kindness!
+                  {{ testimonial.content }}
                 </p>
-                <p class="name">Dennis Green</p>
-                <span class="position">Marketing Manager</span>
+                <p class="name">{{ testimonial.name }}</p>
+                <span class="position">{{ testimonial.position }}</span>
               </div>
             </div>
           </div>
-          <div class="item">
-            <div class="testimony-wrap p-4 pb-5">
-              <div
-                class="user-img mb-5"
-                style="
-                  background-image: url({% static 'clinicapp/images/p6.jpg' %});
-                "
-              >
-                <span
-                  class="quote d-flex align-items-center justify-content-center"
-                >
-                  <i class="icon-quote-left"></i>
-                </span>
-              </div>
-              <div class="text text-center">
-                <p class="mb-5">
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                </p>
-                <p class="name">Dennis Green</p>
-                <span class="position">Interface Designer</span>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="testimony-wrap p-4 pb-5">
-              <div
-                class="user-img mb-5"
-                style="
-                  background-image: url({% static 'clinicapp/images/p4.jpg' %});
-                "
-              >
-                <span
-                  class="quote d-flex align-items-center justify-content-center"
-                >
-                  <i class="icon-quote-left"></i>
-                </span>
-              </div>
-              <div class="text text-center">
-                <p class="mb-5">
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                </p>
-                <p class="name">Dennis Green</p>
-                <span class="position">UI Designer</span>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="testimony-wrap p-4 pb-5">
-              <div
-                class="user-img mb-5"
-                style="
-                  background-image: url({% static 'clinicapp/images/p2.jpg' %});
-                "
-              >
-                <span
-                  class="quote d-flex align-items-center justify-content-center"
-                >
-                  <i class="icon-quote-left"></i>
-                </span>
-              </div>
-              <div class="text text-center">
-                <p class="mb-5">
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                </p>
-                <p class="name">Dennis Green</p>
-                <span class="position">Web Developer</span>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="testimony-wrap p-4 pb-5">
-              <div
-                class="user-img mb-5"
-                style="
-                  background-image: url({% static 'clinicapp/images/p1.jpg' %});
-                "
-              >
-                <span
-                  class="quote d-flex align-items-center justify-content-center"
-                >
-                  <i class="icon-quote-left"></i>
-                </span>
-              </div>
-              <div class="text text-center">
-                <p class="mb-5">
-                  Far far away, behind the word mountains, far from the
-                  countries Vokalia and Consonantia, there live the blind texts.
-                </p>
-                <p class="name">Dennis Green</p>
-                <span class="position">System Analytics</span>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>

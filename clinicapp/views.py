@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
 from .forms import AppointmentForm, NewsletterForm
-from .models import TeamMember, Subscriber
+from .models import TeamMember, Subscriber, Testimonial
 from django.urls import reverse
 
 def book_appointment(request):
@@ -88,8 +88,10 @@ def confirm_subscription(request, token):
 # Create your views here.
 def home(request):
     featured_members = TeamMember.objects.filter(is_featured=True)[:4]
+    testimonials = Testimonial.objects.filter(active=True)
     context = {
         'featured_members': featured_members,
+        'testimonials': testimonials,
     }
     return render(request, 'home.html', context)
 
