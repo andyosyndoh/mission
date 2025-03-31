@@ -160,82 +160,22 @@
 		<div class="row justify-content-center ftco-animate">
 			<div class="col-md-8">
 				<div class="carousel-testimony owl-carousel ftco-owl">
+					{% for testimonial in testimonials %}
 					<div class="item">
 						<div class="testimony-wrap p-4 pb-5">
-							<div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p2.jpg' %});">
+							<div class="user-img mb-5" style="background-image: url({{ testimonial.image.url }});">
 								<span class="quote d-flex align-items-center justify-content-center">
 									<i class="icon-quote-left"></i>
 								</span>
 							</div>
 							<div class="text text-center">
-								<p class="mb-5">Even the all-powerful Pointing has no control about the blind texts it
-									is an almost unorthographic life One day however a small line of blind text by the
-									name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-								<p class="name">Dennis Green</p>
-								<span class="position">Marketing Manager</span>
+								<p class="mb-5">{{ testimonial.content }}</p>
+								<p class="name">{{ testimonial.name }}</p>
+								<span class="position">{{ testimonial.position }}</span>
 							</div>
 						</div>
 					</div>
-					<div class="item">
-						<div class="testimony-wrap p-4 pb-5">
-							<div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p1.jpg' %})">
-								<span class="quote d-flex align-items-center justify-content-center">
-									<i class="icon-quote-left"></i>
-								</span>
-							</div>
-							<div class="text text-center">
-								<p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia
-									and Consonantia, there live the blind texts.</p>
-								<p class="name">Dennis Green</p>
-								<span class="position">Interface Designer</span>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="testimony-wrap p-4 pb-5">
-							<div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p4.jpg' %})">
-								<span class="quote d-flex align-items-center justify-content-center">
-									<i class="icon-quote-left"></i>
-								</span>
-							</div>
-							<div class="text text-center">
-								<p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia
-									and Consonantia, there live the blind texts.</p>
-								<p class="name">Dennis Green</p>
-								<span class="position">UI Designer</span>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="testimony-wrap p-4 pb-5">
-							<div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p5.jpg' %})">
-								<span class="quote d-flex align-items-center justify-content-center">
-									<i class="icon-quote-left"></i>
-								</span>
-							</div>
-							<div class="text text-center">
-								<p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia
-									and Consonantia, there live the blind texts.</p>
-								<p class="name">Dennis Green</p>
-								<span class="position">Web Developer</span>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="testimony-wrap p-4 pb-5">
-							<div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p8.jpg' %})">
-								<span class="quote d-flex align-items-center justify-content-center">
-									<i class="icon-quote-left"></i>
-								</span>
-							</div>
-							<div class="text text-center">
-								<p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia
-									and Consonantia, there live the blind texts.</p>
-								<p class="name">Dennis Green</p>
-								<span class="position">System Analytics</span>
-							</div>
-						</div>
-					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>

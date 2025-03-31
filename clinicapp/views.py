@@ -96,7 +96,11 @@ def home(request):
     return render(request, 'home.html', context)
 
 def about(request):
-    return render(request, 'about.html', {})
+    testimonials = Testimonial.objects.filter(active=True)
+    context = {
+        'testimonials': testimonials,
+    }
+    return render(request, 'about.html', context)
 
 def services(request):
     return render(request, 'services.html', {})
