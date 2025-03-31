@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
 <section class="home-slider owl-carousel">
-    <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');">
+    <div class="slider-item bread-item" style="background-image: url({% static 'clinicapp/images/careers1.jpg' %});">
         <div class="overlay"></div>
         <div class="container">
             <div class="row slider-text align-items-end">
