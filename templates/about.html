@@ -67,23 +67,16 @@
 								aria-labelledby="v-pills-whatwedo-tab">
 								<div>
 									<h2 class="mb-4">We Offer High Quality Services</h2>
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and
-										Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
-										right at the coast of the Semantics, a large language ocean.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate,
-										quibusdam sunt iste dolores consequatur</p>
+									<p>At Koru Mission Hospital, we are committed to providing exceptional medical care with compassion and expertise. Our team of highly skilled doctors, nurses, and healthcare professionals work tirelessly to ensure your well-being.</p>
 								</div>
 							</div>
 
 							<div class="tab-pane fade" id="v-pills-mission" role="tabpanel"
 								aria-labelledby="v-pills-mission-tab">
 								<div>
-									<h2 class="mb-4">To Accomodate All Patients</h2>
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and
-										Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
-										right at the coast of the Semantics, a large language ocean.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate,
-										quibusdam sunt iste dolores consequatur</p>
+									<h2 class="mb-4">To Promote Wellbeing for All Patients</h2>
+									<p>To provide healthcare services in a fiscally responsible manner which contributes to the physical,
+									psychological, social and spiritual wellbeing of the patients and community we serve </p>
 								</div>
 							</div>
 
@@ -91,11 +84,7 @@
 								aria-labelledby="v-pills-goal-tab">
 								<div>
 									<h2 class="mb-4">Help Our Customers Needs</h2>
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and
-										Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
-										right at the coast of the Semantics, a large language ocean.</p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt voluptate,
-										quibusdam sunt iste dolores consequatur</p>
+									<p>Commitment to courtesy and Excellence in service delivery.</p>
 								</div>
 							</div>
 						</div>
@@ -121,8 +110,8 @@
       						<span class="icon-check2"></span>
       					</div>
       					<div class="text">
-	      					<h3>Well Experience Dentist</h3>
-	      					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+	      					<h3>Intergrity</h3>
+	      					<p>We uphold the highest ethical standards, ensuring honesty, transparency, and professionalism in all our services.</p>
       					</div>
       				</div>
       				<div class="list-services d-flex ftco-animate">
@@ -130,8 +119,8 @@
       						<span class="icon-check2"></span>
       					</div>
       					<div class="text">
-	      					<h3>High Technology Facilities</h3>
-	      					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+	      					<h3>Trust</h3>
+	      					<p>We build strong relationships with our patients and community through reliability, confidentiality, and compassionate care.</p>
       					</div>
       				</div>
       				<div class="list-services d-flex ftco-animate">
@@ -139,10 +128,19 @@
       						<span class="icon-check2"></span>
       					</div>
       					<div class="text">
-	      					<h3>Comfortable Clinics</h3>
-	      					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+	      					<h3>Accountability</h3>
+	      					<p>We take full responsibility for our actions, delivering quality healthcare with dedication and continuous improvement.</p>
       					</div>
       				</div>
+					  <div class="list-services d-flex ftco-animate">
+						<div class="icon d-flex justify-content-center align-items-center">
+							<span class="icon-check2"></span>
+						</div>
+						<div class="text">
+							<h3>Passion</h3>
+							<p> We are committed to serving with compassion, enthusiasm, and a deep dedication to improving lives.</p>
+						</div>
+					</div>
       			</div>
       		</div>
       	</div>
@@ -160,96 +158,35 @@
 		<div class="row justify-content-center ftco-animate">
 			<div class="col-md-8">
 				<div class="carousel-testimony owl-carousel ftco-owl">
+					{% for testimonial in testimonials %}
 					<div class="item">
 						<div class="testimony-wrap p-4 pb-5">
-							<div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p2.jpg' %});">
+							<div class="user-img mb-5" style="background-image: url({{ testimonial.image.url }});">
 								<span class="quote d-flex align-items-center justify-content-center">
 									<i class="icon-quote-left"></i>
 								</span>
 							</div>
 							<div class="text text-center">
-								<p class="mb-5">Even the all-powerful Pointing has no control about the blind texts it
-									is an almost unorthographic life One day however a small line of blind text by the
-									name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-								<p class="name">Dennis Green</p>
-								<span class="position">Marketing Manager</span>
+								<p class="mb-5">{{ testimonial.content }}</p>
+								<p class="name">{{ testimonial.name }}</p>
+								<span class="position">{{ testimonial.position }}</span>
 							</div>
 						</div>
 					</div>
-					<div class="item">
-						<div class="testimony-wrap p-4 pb-5">
-							<div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p1.jpg' %})">
-								<span class="quote d-flex align-items-center justify-content-center">
-									<i class="icon-quote-left"></i>
-								</span>
-							</div>
-							<div class="text text-center">
-								<p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia
-									and Consonantia, there live the blind texts.</p>
-								<p class="name">Dennis Green</p>
-								<span class="position">Interface Designer</span>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="testimony-wrap p-4 pb-5">
-							<div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p4.jpg' %})">
-								<span class="quote d-flex align-items-center justify-content-center">
-									<i class="icon-quote-left"></i>
-								</span>
-							</div>
-							<div class="text text-center">
-								<p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia
-									and Consonantia, there live the blind texts.</p>
-								<p class="name">Dennis Green</p>
-								<span class="position">UI Designer</span>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="testimony-wrap p-4 pb-5">
-							<div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p5.jpg' %})">
-								<span class="quote d-flex align-items-center justify-content-center">
-									<i class="icon-quote-left"></i>
-								</span>
-							</div>
-							<div class="text text-center">
-								<p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia
-									and Consonantia, there live the blind texts.</p>
-								<p class="name">Dennis Green</p>
-								<span class="position">Web Developer</span>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="testimony-wrap p-4 pb-5">
-							<div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p8.jpg' %})">
-								<span class="quote d-flex align-items-center justify-content-center">
-									<i class="icon-quote-left"></i>
-								</span>
-							</div>
-							<div class="text text-center">
-								<p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia
-									and Consonantia, there live the blind texts.</p>
-								<p class="name">Dennis Green</p>
-								<span class="position">System Analytics</span>
-							</div>
-						</div>
-					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 <!-- TO BE DONE -->
-<section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url({% static 'clinicapp/images/d11.jpg' %});"
+<section class="ftco-section ftco-counter img" id="section-counter"
 	data-stellar-background-ratio="0.5">
 	<div class="container">
 		<div class="row d-flex align-items-center">
 			<div class="col-md-3 aside-stretch py-5">
 				<div class=" heading-section heading-section-white ftco-animate pr-md-4">
 					<h2 class="mb-3">Achievements</h2>
-					<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
 				</div>
 			</div>
 			<div class="col-md-9 py-5 pl-md-5">
@@ -257,32 +194,32 @@
 					<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 						<div class="block-18">
 							<div class="text">
-								<strong class="number" data-number="14">0</strong>
-								<span>Years of Experience</span>
+								<strong class="number" data-number="52">0</strong>
+								<span>Years of Operation</span>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 						<div class="block-18">
 							<div class="text">
-								<strong class="number" data-number="4500">0</strong>
-								<span>Qualified Dentist</span>
+								<strong class="number" data-number="35">0</strong>
+								<span>Total Staff</span>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 						<div class="block-18">
 							<div class="text">
-								<strong class="number" data-number="4200">0</strong>
-								<span>Happy Smiling Customer</span>
+								<strong class="number" data-number="15560">0</strong>
+								<span>Catchment population</span>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 						<div class="block-18">
 							<div class="text">
-								<strong class="number" data-number="320">0</strong>
-								<span>Patients Per Year</span>
+								<strong class="number" data-number="100">0</strong>
+								<span>Bed Capacity</span>
 							</div>
 						</div>
 					</div>

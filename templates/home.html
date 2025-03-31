@@ -1,46 +1,122 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<section class="home-slider owl-carousel">
+  {% load static %}
+  <div
+    class="slider-item"
+    style="background-image: url({% static 'clinicapp/images/h3.jpg' %})"
+  >
+    <div class="overlay"></div>
+    <div class="container">
+      <div
+        class="row slider-text align-items-center"
+        data-scrollax-parent="true"
+      >
+        <div
+          class="col-md-6 col-sm-12 ftco-animate"
+          data-scrollax=" properties: { translateY: '70%' }"
+        >
+          <h1
+            class="mb-4"
+            data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"
+          >
+            A Faith- Based Level-4 Hospital
+          </h1>
+          <p
+            class="mb-4"
+            data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"
+          >
+            A state-of-the-art Level 4 facility providing advanced medical care,
+            compassionate service, and community-centered healing.
+          </p>
+          <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+            <a
+              href="#"
+              class="btn btn-primary px-4 py-3"
+              data-toggle="modal"
+              data-target="#modalRequest"
+              >Make an Appointment</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-{% block content %}
-    <section class="home-slider owl-carousel">
-		{% load static %}
-      <div class="slider-item" style="background-image: url({% static 'clinicapp/images/h3.jpg' %});">
-        <div class="overlay"></div>
-        <div class="container">
-          <div class="row slider-text align-items-center" data-scrollax-parent="true">
-            <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A Faith- Based Level-4 Hospital</h1>
-              <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A state-of-the-art Level 4 facility providing advanced medical care, compassionate service, and community-centered healing.</p>
-              <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="#" class="btn btn-primary px-4 py-3" data-toggle="modal" data-target="#modalRequest">Make an Appointment</a></p>
-            </div>
-          </div>
+  <div
+    class="slider-item"
+    style="background-image: url({% static 'clinicapp/images/h1.jpg' %})"
+  >
+    <div class="overlay"></div>
+    <div class="container">
+      <div
+        class="row slider-text align-items-center"
+        data-scrollax-parent="true"
+      >
+        <div
+          class="col-md-6 col-sm-12 ftco-animate"
+          data-scrollax=" properties: { translateY: '70%' }"
+        >
+          <h1
+            class="mb-4"
+            data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"
+          >
+            Restoring Health, Renewing Hope
+          </h1>
+          <p class="mb-4">
+            Providing expert medical services with state-of-the-art technology
+            and a heart for the community.
+          </p>
+          <p>
+            <a
+              href="#"
+              class="btn btn-primary px-4 py-3"
+              data-toggle="modal"
+              data-target="#modalRequest"
+              >Make an Appointment</a
+            >
+          </p>
         </div>
       </div>
-
-      <div class="slider-item" style="background-image: url({% static 'clinicapp/images/h1.jpg' %});">
-        <div class="overlay"></div>
-        <div class="container">
-          <div class="row slider-text align-items-center" data-scrollax-parent="true">
-            <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Your Health Our Priority</h1>
-              <p class="mb-4">Providing expert medical services with state-of-the-art technology and a heart for the community.</p>
-              <p><a href="#" class="btn btn-primary px-4 py-3" data-toggle="modal" data-target="#modalRequest">Make an Appointment</a></p>
-            </div>
-          </div>
+    </div>
+  </div>
+  <div
+    class="slider-item"
+    style="background-image: url({% static 'clinicapp/images/c5.jpg' %})"
+  >
+    <div class="overlay"></div>
+    <div class="container">
+      <div
+        class="row slider-text align-items-center"
+        data-scrollax-parent="true"
+      >
+        <div
+          class="col-md-6 col-sm-12 ftco-animate"
+          data-scrollax=" properties: { translateY: '70%' }"
+        >
+          <h1
+            class="mb-4"
+            data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"
+          >
+            Restoring Health, Renewing Hope
+          </h1>
+          <p class="mb-4">
+            Providing expert medical services with state-of-the-art technology
+            and a heart for the community.
+          </p>
+          <p>
+            <a
+              href="#"
+              class="btn btn-primary px-4 py-3"
+              data-toggle="modal"
+              data-target="#modalRequest"
+              >Make an Appointment</a
+            >
+          </p>
         </div>
       </div>
-	  <div class="slider-item" style="background-image: url({% static 'clinicapp/images/c5.jpg' %});">
-        <div class="overlay"></div>
-        <div class="container">
-          <div class="row slider-text align-items-center" data-scrollax-parent="true">
-            <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Restoring Health, Renewing Hope</h1>
-              <p class="mb-4">Providing expert medical services with state-of-the-art technology and a heart for the community.</p>
-              <p><a href="#" class="btn btn-primary px-4 py-3" data-toggle="modal" data-target="#modalRequest">Make an Appointment</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
+  </div>
+</section>
 
     <section class="ftco-intro">
     	<div class="container">
@@ -228,53 +304,55 @@
       </div>
     </section>
 
-
 <section class="ftco-section">
   <div class="container">
     <div class="row justify-content-center mb-5 pb-5">
       <div class="col-md-7 text-center heading-section ftco-animate">
-        <h2 class="mb-3">Meet Our Experience Doctors</h2>
-        <p>Our team of highly skilled and compassionate doctors is dedicated to providing exceptional care for you and your loved ones. </p>
+        <h2 class="mb-3">Featured Team Members</h2>
+        <p>
+          Our team of highly skilled and compassionate doctors is dedicated to
+          providing exceptional care for you and your loved ones.
+        </p>
       </div>
     </div>
     <div class="row">
-      {% for doctor in featured_doctors %}
+      {% for member in featured_members %}
       <div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         <div class="staff">
           <div
             class="img mb-4"
-            style="background-image: url({{ doctor.image.url }});"
+            style="background-image: url({{ member.image.url }});"
           ></div>
           <div class="info text-center">
-            <h3><a href="#">{{ doctor.name }}</a></h3>
-            <span class="position">{{ doctor.position }}</span>
+            <h3><a href="#">{{ member.name }}</a></h3>
+            <span class="position">{{ member.position }}</span>
             <div class="text">
-              <p class="bio-short">{{ doctor.bio|truncatechars:70 }}</p>
-              <p class="bio-full" style="display: none">{{ doctor.bio }}</p>
+              <p class="bio-short">{{ member.bio|truncatechars:70 }}</p>
+              <p class="bio-full" style="display: none">{{ member.bio }}</p>
               <button class="btn btn-link read-more">Read More</button>
               <ul class="ftco-social">
-                {% if doctor.twitter %}
+                {% if member.twitter %}
                 <li class="ftco-animate">
-                  <a href="{{ doctor.twitter }}"
+                  <a href="{{ member.twitter }}" target="_blank"
                     ><span class="icon-twitter"></span
                   ></a>
                 </li>
-                {% endif %} {% if doctor.facebook %}
+                {% endif %} {% if member.facebook %}
                 <li class="ftco-animate">
-                  <a href="{{ doctor.facebook }}"
+                  <a href="{{ member.facebook }}" target="_blank"
                     ><span class="icon-facebook"></span
                   ></a>
                 </li>
-                {% endif %} {% if doctor.instagram %}
+                {% endif %} {% if member.instagram %}
                 <li class="ftco-animate">
-                  <a href="{{ doctor.instagram }}"
+                  <a href="{{ member.instagram }}" target="_blank"
                     ><span class="icon-instagram"></span
                   ></a>
                 </li>
-                {% endif %} {% if doctor.google_plus %}
+                {% endif %} {% if member.linkedin %}
                 <li class="ftco-animate">
-                  <a href="{{ doctor.google_plus }}"
-                    ><span class="icon-google-plus"></span
+                  <a href="{{ member.linkedin }}" target="_blank"
+                    ><span class="icon-linkedin"></span
                   ></a>
                 </li>
                 {% endif %}
@@ -291,7 +369,14 @@
     </div>
     <div class="row mt-5 justify-conten-center">
       <div class="col-md-8 ftco-animate">
-        <p>Our team of experienced doctors is committed to providing exceptional healthcare with compassion and expertise. Each member of our staff brings years of specialized training and a passion for healing, ensuring that every patient receives personalized, high-quality care. Your health and well-being are our top priorities, and we are here to support you every step of the way.</p>
+        <p>
+          Our team of experienced doctors is committed to providing exceptional
+          healthcare with compassion and expertise. Each member of our staff
+          brings years of specialized training and a passion for healing,
+          ensuring that every patient receives personalized, high-quality care.
+          Your health and well-being are our top priorities, and we are here to
+          support you every step of the way.
+        </p>
       </div>
     </div>
   </div>
@@ -470,157 +555,154 @@
   </div>
 </section> -->
 
-    <section class="ftco-section-parallax">
-      <div class="parallax-img d-flex align-items-center">
-        <div class="container">
-          <div class="row d-flex justify-content-center">
-            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-              <h2>Subcribe to our Newsletter</h2>
-              <p>Stay informed about the latest health tips, medical advancements, and updates from our hospital. Join our community today and take the first step toward better health!</p>
-              <div class="row d-flex justify-content-center mt-5">
-                <div class="col-md-8">
-                  <form action="#" class="subscribe-form">
-                    <div class="form-group d-flex">
-                      <input type="text" class="form-control" placeholder="Enter email address">
-                      <input type="submit" value="Subscribe" class="submit px-3">
-                    </div>
-                  </form>
+<section class="ftco-section-parallax">
+  <div class="parallax-img d-flex align-items-center">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div
+          class="col-md-7 text-center heading-section heading-section-white ftco-animate"
+        >
+          <h2>Subcribe to our Newsletter</h2>
+          <p>
+            Stay informed about the latest health tips, medical advancements,
+            and updates from our hospital. Join our community today and take the
+            first step toward better health!
+          </p>
+          <div class="row d-flex justify-content-center mt-5">
+            <div class="col-md-8">
+              <form
+                method="post"
+                action="{% url 'newsletter_subscribe' %}"
+                class="subscribe-form"
+              >
+                {% csrf_token %}
+                <div class="form-group d-flex">
+                  {{ form.email }}
+                  <!-- <input type="text" class="form-control" placeholder="Enter email address"> -->
+                  <input type="submit" value="Subscribe" class="submit px-3" />
                 </div>
-              </div>
+                {% if messages %} {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %} {% endif %}
+              </form>
             </div>
           </div>
         </div>
       </div>
-    </section>
-		
-		<section class="ftco-section testimony-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2 class="mb-2">Testimony</h2>
-            <span class="subheading">Our Happy Customer Says</span>
-          </div>
-        </div>
-        <div class="row justify-content-center ftco-animate">
-          <div class="col-md-8">
-            <div class="carousel-testimony owl-carousel ftco-owl">
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p5.jpg' %})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5">Koru Mission Hospital has been a blessing to my family. The care and attention we received were exceptional. The doctors and staff went above and beyond to make us feel comfortable and supported. Thank you for your dedication and kindness!</p>
-                    <p class="name">Dennis Green</p>
-                    <span class="position">Marketing Manager</span>
-                  </div>
-                </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section testimony-section bg-light">
+  <div class="container">
+    <div class="row justify-content-center mb-5 pb-3">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <h2 class="mb-2">Testimony</h2>
+        <span class="subheading">Our Happy Customer Says</span>
+      </div>
+    </div>
+    <div class="row justify-content-center ftco-animate">
+      <div class="col-md-8">
+        <div class="carousel-testimony owl-carousel ftco-owl">
+          {% for testimonial in testimonials %}
+          <div class="item">
+            <div class="testimony-wrap p-4 pb-5">
+              <div
+                class="user-img mb-5"
+                style="
+                  background-image: url({{ testimonial.image.url }});
+                "
+              >
+                <span
+                  class="quote d-flex align-items-center justify-content-center"
+                >
+                  <i class="icon-quote-left"></i>
+                </span>
               </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p6.jpg' %})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Dennis Green</p>
-                    <span class="position">Interface Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p4.jpg' %})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Dennis Green</p>
-                    <span class="position">UI Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p2.jpg' %})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Dennis Green</p>
-                    <span class="position">Web Developer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({% static 'clinicapp/images/p1.jpg' %})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text text-center">
-                    <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Dennis Green</p>
-                    <span class="position">System Analytics</span>
-                  </div>
-                </div>
+              <div class="text text-center">
+                <p class="mb-5">
+                  {{ testimonial.content }}
+                </p>
+                <p class="name">{{ testimonial.name }}</p>
+                <span class="position">{{ testimonial.position }}</span>
               </div>
             </div>
           </div>
+          {% endfor %}
         </div>
       </div>
-    </section>
-		
-		<section class="ftco-gallery">
-    	<div class="container-wrap">
-    		<div class="row no-gutters">
-					<div class="col-md-3 ftco-animate">
-						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url(images/gallery-1.jpg);">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-						</a>
-					</div>
-					<div class="col-md-3 ftco-animate">
-						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url(images/gallery-2.jpg);">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-						</a>
-					</div>
-					<div class="col-md-3 ftco-animate">
-						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url(images/gallery-3.jpg);">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-						</a>
-					</div>
-					<div class="col-md-3 ftco-animate">
-						<a href="#" class="gallery img d-flex align-items-center" style="background-image: url(images/gallery-4.jpg);">
-							<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-						</a>
-					</div>
-        </div>
-    	</div>
-    </section>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-gallery">
+  <div class="container-wrap">
+    <div class="row no-gutters">
+      <div class="col-md-3 ftco-animate">
+        <a
+          href="#"
+          class="gallery img d-flex align-items-center"
+          style="background-image: url(images/gallery-1.jpg)"
+        >
+          <div
+            class="icon mb-4 d-flex align-items-center justify-content-center"
+          >
+            <span class="icon-search"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 ftco-animate">
+        <a
+          href="#"
+          class="gallery img d-flex align-items-center"
+          style="background-image: url(images/gallery-2.jpg)"
+        >
+          <div
+            class="icon mb-4 d-flex align-items-center justify-content-center"
+          >
+            <span class="icon-search"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 ftco-animate">
+        <a
+          href="#"
+          class="gallery img d-flex align-items-center"
+          style="background-image: url(images/gallery-3.jpg)"
+        >
+          <div
+            class="icon mb-4 d-flex align-items-center justify-content-center"
+          >
+            <span class="icon-search"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 ftco-animate">
+        <a
+          href="#"
+          class="gallery img d-flex align-items-center"
+          style="background-image: url(images/gallery-4.jpg)"
+        >
+          <div
+            class="icon mb-4 d-flex align-items-center justify-content-center"
+          >
+            <span class="icon-search"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="ftco-section">
   <div class="container">
     <div class="row justify-content-center mb-5 pb-3">
       <div class="col-md-7 text-center heading-section ftco-animate">
         <h2 class="mb-2">Latest Blog</h2>
-        <p>Explore our latest articles on health tips, medical insights, and wellness advice. Stay informed and inspired!</p>
+        <p>
+          Explore our latest articles on health tips, medical insights, and
+          wellness advice. Stay informed and inspired!
+        </p>
       </div>
     </div>
     <div class="row">
@@ -664,14 +746,24 @@
     <div class="row">
       <div class="col-md-6 pr-md-5 aside-stretch py-5 choose">
         <div class="heading-section heading-section-white mb-5 ftco-animate">
-          <h2 class="mb-2">Koru Mission Procedures &amp; High Quality Services</h2>
+          <h2 class="mb-2">
+            Koru Mission Procedures &amp; High Quality Services
+          </h2>
         </div>
         <div class="ftco-animate">
-          <p>At Koru Mission Hospital, we are dedicated to providing exceptional healthcare services that prioritize your well-being. Our advanced medical procedures and compassionate care ensure that every patient receives the highest standard of treatment in a supportive and healing environment.</p>
+          <p>
+            At Koru Mission Hospital, we are dedicated to providing exceptional
+            healthcare services that prioritize your well-being. Our advanced
+            medical procedures and compassionate care ensure that every patient
+            receives the highest standard of treatment in a supportive and
+            healing environment.
+          </p>
           <ul class="un-styled my-5">
             <li><span class="icon-check"></span>Expert Medical Team</li>
             <li><span class="icon-check"></span>Modern Equipment</li>
-            <li><span class="icon-check"></span>Friendly and Comfortable Care</li>
+            <li>
+              <span class="icon-check"></span>Friendly and Comfortable Care
+            </li>
           </ul>
         </div>
       </div>
@@ -683,32 +775,47 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Full Name">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Full Name"
+                />
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Email">
+                <input type="text" class="form-control" placeholder="Email" />
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Phone">
+                <input type="text" class="form-control" placeholder="Phone" />
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Website">
+                <input type="text" class="form-control" placeholder="Website" />
               </div>
             </div>
             <div class="col-md-12">
               <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="7"
+                  class="form-control"
+                  placeholder="Message"
+                ></textarea>
               </div>
             </div>
             <div class="col-md-12">
               <div class="form-group">
-                <input type="submit" value="Get a Quote" class="btn btn-primary py-3 px-5">
+                <input
+                  type="submit"
+                  value="Get a Quote"
+                  class="btn btn-primary py-3 px-5"
+                />
               </div>
             </div>
           </div>

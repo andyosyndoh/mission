@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="home-slider owl-carousel">
+    <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text align-items-end">
+                <div class="col-md-7 col-sm-12 ftco-animate mb-5">
+                    <h1 class="mb-3">{{ job.title }}</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> 
+                    <span><a href="{% url 'careers:careers_list' %}">Careers</a></span> 
+                    <span>{{ job.title }}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ftco-animate">
+                <h2 class="mb-4">{{ job.title }}</h2>
+                <div class="meta mb-4">
+                    <p><span class="icon-location"></span> {{ job.location }} | 
+                    <span class="icon-clock-o"></span> {{ job.job_type|title }} | 
+                    <span class="icon-calendar"></span> Apply by {{ job.application_deadline|date:"M d, Y" }}</p>
+                </div>
+                
+                <h4>Job Description</h4>
+                <p>{{ job.description|safe }}</p>
+                
+                <h4>Requirements</h4>
+                <p>{{ job.requirements|safe }}</p>
+                
+                <div class="apply-button mt-5">
+                    <a href="mailto:careers@yourhospital.com" class="btn btn-primary">Apply Now</a>
+                </div>
+            </div>
+
+            <div class="col-md-4 sidebar ftco-animate">
+                <div class="sidebar-box">
+                    <h3>Application Details</h3>
+                    <ul class="list-unstyled">
+                        <li><strong>Location:</strong> {{ job.location }}</li>
+                        <li><strong>Position Type:</strong> {{ job.job_type|title }}</li>
+                        <li><strong>Application Deadline:</strong> {{ job.application_deadline|date:"M d, Y" }}</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-box">
+                    <h3>Recent Openings</h3>
+                    {% for job in recent_jobs %}
+                    <div class="block-21 mb-4">
+                        <div class="text">
+                            <h3 class="heading"><a href="{{ job.get_absolute_url }}">{{ job.title }}</a></h3>
+                            <div class="meta">
+                                <div><span class="icon-location"></span> {{ job.location }}</div>
+                                <div><span class="icon-calendar"></span> {{ job.application_deadline|date:"M d, Y" }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

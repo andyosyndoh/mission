@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="home-slider owl-carousel">
+    <div class="slider-item bread-item" style="background-image: url('images/bg_1.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text align-items-end">
+                <div class="col-md-7 col-sm-12 ftco-animate mb-5">
+                    <h1 class="mb-3">Career Opportunities</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Careers</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% for job in jobs %}
+                <div class="job-post mb-5">
+                    <h2><a href="{{ job.get_absolute_url }}">{{ job.title }}</a></h2>
+                    <div class="meta mb-3">
+                        <span class="mr-3"><i class="icon-location"></i> {{ job.location }}</span>
+                        <span class="mr-3"><i class="icon-clock-o"></i> {{ job.job_type|title }}</span>
+                        <span><i class="icon-calendar"></i> Apply by {{ job.application_deadline|date:"M d, Y" }}</span>
+                    </div>
+                    <p>{{ job.description|truncatewords:30 }}</p>
+                    <a href="{{ job.get_absolute_url }}" class="btn btn-primary">View Position</a>
+                </div>
+                {% endfor %}
+                
+                <!-- Pagination -->
+                <div class="row mt-5">
+                    <div class="col">
+                        <div class="block-27">
+                            <ul>
+                                {% if page_obj.has_previous %}
+                                <li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                                {% endif %}
+                                {% for num in page_obj.paginator.page_range %}
+                                <li class="{% if page_obj.number == num %}active{% endif %}">
+                                    <a href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                <li><a href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 sidebar ftco-animate">
+                <div class="sidebar-box">
+                    <h3>Recent Openings</h3>
+                    {% for job in recent_jobs %}
+                    <div class="block-21 mb-4">
+                        <div class="text">
+                            <h3 class="heading"><a href="{{ job.get_absolute_url }}">{{ job.title }}</a></h3>
+                            <div class="meta">
+                                <div><span class="icon-location"></span> {{ job.location }}</div>
+                                <div><span class="icon-calendar"></span> {{ job.application_deadline|date:"M d, Y" }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
