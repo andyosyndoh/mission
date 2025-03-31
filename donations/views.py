@@ -40,7 +40,7 @@ def process_donation(request):
             logger.info(f"Form data: name={name}, email={email}, amount={amount}, phone={phone}, payment_method={payment_method}")
 
             # Generate a unique transaction reference
-            tx_ref = f"DON-{uuid.uuid4().hex[:10]}"
+            tx_ref = uuid.uuid4()
             logger.info(f"Transaction reference: {tx_ref}")
 
             # Create the donation record
