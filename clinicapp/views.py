@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
-from .forms import AppointmentForm, NewsletterForm
+from .forms import AppointmentForm, NewsletterForm, ContactForm
 from .models import TeamMember, Subscriber, Testimonial
 from django.urls import reverse
 
@@ -84,6 +84,18 @@ def confirm_subscription(request, token):
         messages.error(request, "Invalid confirmation link")
     
     return redirect('home')
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your message has been sent successfully!')
+            return redirect('contact')
+    else:
+        form = ContactForm()
+    
+    return render(request, 'contact.html', {'form': form})
 
 # Create your views here.
 def home(request):
