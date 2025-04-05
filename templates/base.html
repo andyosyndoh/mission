@@ -1,387 +1,410 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Koru Mission Hospital</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'clinicapp/css/open-iconic-bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'clinicapp/css/animate.css' %}">
-    <link rel="stylesheet" href="{% static 'clinicapp/css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'clinicapp/css/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="{% static 'clinicapp/css/magnific-popup.css' %}">
-    <link rel="stylesheet" href="{% static 'clinicapp/css/aos.css' %}">
-    <link rel="stylesheet" href="{% static 'clinicapp/css/ionicons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'clinicapp/css/bootstrap-datepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'clinicapp/css/jquery.timepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'clinicapp/css/flaticon.css' %}">
-    <link rel="stylesheet" href="{% static 'clinicapp/css/icomoon.css' %}">
-    <link rel="stylesheet" href="{% static 'clinicapp/css/style.css' %}">
+<head>
+  <title>Koru Mission Hospital</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <style>
-      .navbar .nav-link {
-        font-size: 15px !important;
-      }
-      /* WhatsApp Button Styling */
-      #whatsappButton {
-          background-color: #25D366; /* WhatsApp green */
-          color: white;
-          border: none;
-          padding: 8px 10px;
-          font-size: 16px;
-          font-weight: bold;
-          cursor: pointer;
-          border-radius: 50px;
-          position: fixed;
-          bottom: 20px;
-          right: 20px;
-          z-index: 1000;
-          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-          display: flex;
-          align-items: center;
-          gap: 5px;
-      }
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Optional: jQuery (for the geocoding AJAX request) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-      /* WhatsApp Icon */
-      #whatsappButton i {
-          font-size: 20px;
-      }
+  <link rel="stylesheet" href="{% static 'clinicapp/css/open-iconic-bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'clinicapp/css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'clinicapp/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'clinicapp/css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'clinicapp/css/magnific-popup.css' %}">
+  <link rel="stylesheet" href="{% static 'clinicapp/css/aos.css' %}">
+  <link rel="stylesheet" href="{% static 'clinicapp/css/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'clinicapp/css/bootstrap-datepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'clinicapp/css/jquery.timepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'clinicapp/css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'clinicapp/css/icomoon.css' %}">
+  <link rel="stylesheet" href="{% static 'clinicapp/css/style.css' %}">
 
-      /* WhatsApp Modal Styling */
-      .whatsapp-modal {
-          display: none; /* Hidden by default */
-          position: fixed;
-          z-index: 1001;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          overflow: auto;
-          background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
-      }
+  <style>
+    .navbar .nav-link {
+      font-size: 15px !important;
+    }
 
-      .whatsapp-modal-content {
-          background-color: rgb(250, 246, 246);
-          padding: 20px;
-          max-width: 400px;
-          border-radius: 20px;
-          text-align: center;
-          font-size: 16px;
-          font-weight: bold;
-          cursor: pointer;
-          border-radius: 50px;
-          position: fixed;
-          bottom: 80px; /* Adjusted to be above WhatsApp button */
-          right: 20px;
-          z-index: 1000;
-          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
+    /* WhatsApp Button Styling */
+    #whatsappButton {
+      background-color: #25D366;
+      /* WhatsApp green */
+      color: white;
+      border: none;
+      padding: 8px 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 50px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-      .whatsapp-close {
-          color: #0c0c0c;
-          align-self: flex-end;
-          font-size: 28px;
-          font-weight: bold;
-          cursor: pointer;
-      }
+    /* WhatsApp Icon */
+    #whatsappButton i {
+      font-size: 20px;
+    }
 
-      .whatsapp-close:hover {
-          color: black;
-      }
+    /* WhatsApp Modal Styling */
+    .whatsapp-modal {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Black with opacity */
+    }
 
-      #startChatButton {
-          background-color: #25D366;
-          color: white;
-          border: none;
-          padding: 10px 20px;
-          font-size: 16px;
-          cursor: pointer;
-          border-radius: 5px;
-          margin-top: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    
-	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="{% url 'home' %}">Koru <span>Mission Hospital</span></a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
+    .whatsapp-modal-content {
+      background-color: rgb(250, 246, 246);
+      padding: 20px;
+      max-width: 400px;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 50px;
+      position: fixed;
+      bottom: 80px;
+      /* Adjusted to be above WhatsApp button */
+      right: 20px;
+      z-index: 1000;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item {% if request.resolver_match.view_name == 'home' %}active{% endif %}">
-              <a href="{% url 'home' %}" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item {% if request.resolver_match.view_name == 'about' %}active{% endif %}">
-              <a href="{% url 'about' %}" class="nav-link">About</a>
-            </li>
-            <li class="nav-item {% if request.resolver_match.view_name == 'services' %}active{% endif %}">
-              <a href="{% url 'services' %}" class="nav-link">Services</a>
-            </li>
-            <li class="nav-item {% if request.resolver_match.view_name == 'team' %}active{% endif %}">
-              <a href="{% url 'team' %}" class="nav-link">Our Team</a>
-            </li>
-            <li class="nav-item {% if 'careers' in request.resolver_match.view_name %}active{% endif %}">
-              <a href="{% url 'careers:careers_list' %}" class="nav-link">Careers</a>
-            </li>
-            <li class="nav-item {% if 'blog' in request.resolver_match.view_name %}active{% endif %}">
-              <a href="{% url 'blog:blog_home' %}" class="nav-link">Blog</a>
-            </li>
-            <li class="nav-item {% if request.resolver_match.view_name == 'contact' %}active{% endif %}">
-              <a href="{% url 'contact' %}" class="nav-link">Contact</a>
-            </li>
-	          <li class="nav-item cta"><a href="#" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Make an Appointment</span></a></li>
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-    <!-- END nav -->
+    .whatsapp-close {
+      color: #0c0c0c;
+      align-self: flex-end;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-    {% block content %}
-    {% endblock %}
+    .whatsapp-close:hover {
+      color: black;
+    }
 
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-        <div class="container">
-          <div class="row mb-5">
-            <div class="col-md-3">
-              <div class="ftco-footer-widget mb-4">
-                <h2 class="ftco-heading-2">KoruMission.</h2>
-                <p>To provide healthcare services in a fiscally responsible manner which contributes to the physical, psychological, social and spiritual wellbeing of the patients and community we serve.</p>
+    #startChatButton {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">Koru <span>Mission Hospital</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item {% if request.resolver_match.view_name == 'home' %}active{% endif %}">
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item {% if request.resolver_match.view_name == 'about' %}active{% endif %}">
+            <a href="{% url 'about' %}" class="nav-link">About</a>
+          </li>
+          <li class="nav-item {% if request.resolver_match.view_name == 'services' %}active{% endif %}">
+            <a href="{% url 'services' %}" class="nav-link">Services</a>
+          </li>
+          <li class="nav-item {% if request.resolver_match.view_name == 'team' %}active{% endif %}">
+            <a href="{% url 'team' %}" class="nav-link">Our Team</a>
+          </li>
+          <li class="nav-item {% if 'careers' in request.resolver_match.view_name %}active{% endif %}">
+            <a href="{% url 'careers:careers_list' %}" class="nav-link">Careers</a>
+          </li>
+          <li class="nav-item {% if 'blog' in request.resolver_match.view_name %}active{% endif %}">
+            <a href="{% url 'blog:blog_home' %}" class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item {% if request.resolver_match.view_name == 'contact' %}active{% endif %}">
+            <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item cta"><a href="#" class="nav-link" data-toggle="modal"
+              data-target="#modalRequest"><span>Make an Appointment</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+
+  {% block content %}
+  {% endblock %}
+
+  <footer class="ftco-footer ftco-bg-dark ftco-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-3">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">KoruMission.</h2>
+            <p>To provide healthcare services in a fiscally responsible manner which contributes to the physical,
+              psychological, social and spiritual wellbeing of the patients and community we serve.</p>
+          </div>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
+            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+          </ul>
+        </div>
+        <div class="col-md-2">
+          <div class="ftco-footer-widget mb-4 ml-md-5">
+            <h2 class="ftco-heading-2">Quick Links</h2>
+            <ul class="list-unstyled">
+              <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
+              <li><a href="{% url 'blog:blog_home' %}" class="py-2 d-block">Blog</a></li>
+              <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 pr-md-4">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Recent Blog</h2>
+            {% for recent_post in recent_posts %}
+            <div class="block-21 mb-4 d-flex">
+              <a class="blog-img mr-4" style="background-image: url('{{ recent_post.image.url }}');"></a>
+              <div class="text">
+                <h3 class="heading"><a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a></h3>
+                <div class="meta">
+                  <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2024</a></div>
+                  <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                  <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                </div>
               </div>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft ">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Office</h2>
+            <div class="block-23 mb-3">
+              <ul>
+                <li><span class="icon icon-map-marker"></span><span class="text">Koru, Kenya</span></li>
+                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+254 116 400 152</span></a></li>
+                <li><a href="#"><span class="icon icon-envelope"></span><span
+                      class="text">hmissionhospital@gmail.com</span></a></li>
               </ul>
             </div>
-            <div class="col-md-2">
-              <div class="ftco-footer-widget mb-4 ml-md-5">
-                <h2 class="ftco-heading-2">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
-                  <li><a href="{% url 'blog:blog_home' %}" class="py-2 d-block">Blog</a></li>
-                  <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-md-4 pr-md-4">
-              <div class="ftco-footer-widget mb-4">
-                <h2 class="ftco-heading-2">Recent Blog</h2>
-                {% for recent_post in recent_posts %}
-                <div class="block-21 mb-4 d-flex">
-                  <a class="blog-img mr-4" style="background-image: url('{{ recent_post.image.url }}');"></a>
-                  <div class="text">
-                    <h3 class="heading"><a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a></h3>
-                    <div class="meta">
-                      <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2024</a></div>
-                      <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                      <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                    </div>
-                  </div>
-                </div>
-                {% endfor %}
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="ftco-footer-widget mb-4">
-                  <h2 class="ftco-heading-2">Office</h2>
-                  <div class="block-23 mb-3">
-                    <ul>
-                      <li><span class="icon icon-map-marker"></span><span class="text">Koru, Kenya</span></li>
-                      <li><a href="#"><span class="icon icon-phone"></span><span class="text">+254 116 400 152</span></a></li>
-                      <li><a href="#"><span class="icon icon-envelope"></span><span class="text">hmissionhospital@gmail.com</span></a></li>
-                    </ul>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <p>
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Koru Mission Hospital
-              </p>
-            </div>
           </div>
         </div>
-      </footer>
-      
-    <!-- WhatsApp Floating Button -->
-    <button id="whatsappButton">
-      <i class="icon-whatsapp"></i> WhatsApp
-    </button>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p>
+            Copyright &copy;
+            <script>document.write(new Date().getFullYear());</script> All rights reserved | Koru Mission Hospital
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-    <!-- WhatsApp Popup Modal -->
-    <div id="whatsappPopup" class="whatsapp-modal">
-      <div class="whatsapp-modal-content">
-        <span class="whatsapp-close">&times;</span>
-        <p>Welcome to The Koru Mission Hospital.</p>
-        <p>We Reply within 24 Hours.</p>
-        <br><br>
-        <p>Thank You For Contacting Us</p>
-        <button id="startChatButton">Start Chat</button>
-      </div>
+  <!-- WhatsApp Floating Button -->
+  <button id="whatsappButton">
+    <i class="icon-whatsapp"></i> WhatsApp
+  </button>
+
+  <!-- WhatsApp Popup Modal -->
+  <div id="whatsappPopup" class="whatsapp-modal">
+    <div class="whatsapp-modal-content">
+      <span class="whatsapp-close">&times;</span>
+      <p>Welcome to The Koru Mission Hospital.</p>
+      <p>We Reply within 24 Hours.</p>
+      <br><br>
+      <p>Thank You For Contacting Us</p>
+      <button id="startChatButton">Start Chat</button>
     </div>
-  
-    <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-  
-    <!-- Appointment Modal -->
-    <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalRequestLabel">Make an Appointment</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form action="{% url 'appointment' %}" method="POST">
-              {% csrf_token %}
-              <div class="form-group">
-                 <!-- <label for="appointment_name" class="text-black">Full Name</label> -->      
-                  <input type="text" class="form-control" name="full_name" placeholder="Full Name" required>
-              </div>
-              <div class="form-group">
-                 <!-- <label for="appointment_email" class="text-black">Email</label> -->
-                <input type="text" class="form-control" name="email" placeholder="Email" required>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-  <!-- <label for="appointment_date" class="text-black">Date</label> -->                
-       <input type="date" class="form-control" name="date" required>   
-                     </div>    
+  </div>
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+        stroke="#F96D00" />
+    </svg></div>
+
+  <!-- Appointment Modal -->
+  <div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRequestLabel">Make an Appointment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'appointment' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
+              <input type="text" class="form-control" name="full_name" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+              <!-- <label for="appointment_email" class="text-black">Email</label> -->
+              <input type="text" class="form-control" name="email" placeholder="Email" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <!-- <label for="appointment_date" class="text-black">Date</label> -->
+                  <input type="date" class="form-control" name="date" required>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-  <!-- <label for="appointment_time" class="text-black">Time</label> -->
-                    <input type="time" class="form-control" name="time" required>
-                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <!-- <label for="appointment_time" class="text-black">Time</label> -->
+                  <input type="time" class="form-control" name="time" required>
                 </div>
               </div>
-              <div class="form-group">
-<!-- <label for="appointment_message" class="text-black">Message</label> -->
-                <textarea class="form-control" name="message" cols="30" rows="10" placeholder="Message"></textarea>
-              </div>
-              <div class="form-group">
-                <input type="submit" value="Make an Appointment" class="btn btn-primary">
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="form-group">
+              <!-- <label for="appointment_message" class="text-black">Message</label> -->
+              <textarea class="form-control" name="message" cols="30" rows="10" placeholder="Message"></textarea>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Make an Appointment" class="btn btn-primary">
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  
-    <script src="{% static 'clinicapp/js/jquery.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery-migrate-3.0.1.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/popper.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery.easing.1.3.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery.waypoints.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery.magnific-popup.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/aos.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery.animateNumber.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/bootstrap-datepicker.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery.timepicker.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/scrollax.min.js' %}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="{% static 'clinicapp/js/google-map.js' %}"></script>
-    <script src="{% static 'clinicapp/js/main.js' %}"></script>
-    
-    <!-- Script for "Read More" functionality -->
-    <script>
-      document.querySelectorAll('.read-more').forEach(button => {
-        button.addEventListener('click', function() {
-          const card = this.closest('.staff');
-          const bioShort = card.querySelector('.bio-short');
-          const bioFull = card.querySelector('.bio-full');
-          
-          if (bioShort.style.display === 'none') {
-            bioShort.style.display = 'block';
-            bioFull.style.display = 'none';
-            this.textContent = 'Read More';
+  </div>
+
+  <script src="{% static 'clinicapp/js/jquery.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/popper.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/aos.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/scrollax.min.js' %}"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+  <script src="{% static 'clinicapp/js/google-map.js' %}"></script>
+  <script src="{% static 'clinicapp/js/main.js' %}"></script>
+
+  <!-- Script for "Read More" functionality -->
+  <script>
+    document.querySelectorAll('.read-more').forEach(button => {
+      button.addEventListener('click', function () {
+        const card = this.closest('.staff');
+        const bioShort = card.querySelector('.bio-short');
+        const bioFull = card.querySelector('.bio-full');
+
+        if (bioShort.style.display === 'none') {
+          bioShort.style.display = 'block';
+          bioFull.style.display = 'none';
+          this.textContent = 'Read More';
+        } else {
+          bioShort.style.display = 'none';
+          bioFull.style.display = 'block';
+          this.textContent = 'Read Less';
+        }
+      });
+    });
+  </script>
+
+  <!-- Script for WhatsApp functionality -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Get elements
+      const whatsappButton = document.getElementById('whatsappButton');
+      const whatsappPopup = document.getElementById('whatsappPopup');
+      const closeButton = document.querySelector('.whatsapp-close');
+      const startChatButton = document.getElementById('startChatButton');
+
+      // Open popup when WhatsApp button is clicked
+      if (whatsappButton) {
+        whatsappButton.addEventListener('click', () => {
+          whatsappPopup.style.display = 'block';
+        });
+      }
+
+      // Close popup when close button is clicked
+      if (closeButton) {
+        closeButton.addEventListener('click', () => {
+          whatsappPopup.style.display = 'none';
+        });
+      }
+
+      // Redirect to WhatsApp Web when Start Chat button is clicked
+      if (startChatButton) {
+        startChatButton.addEventListener('click', () => {
+          const phoneNumber = '254798681754'; // WhatsApp number
+          const message = 'Hello, I would like to chat with The Koru Mission Hospital.';
+
+          // Detect if user is on mobile or desktop
+          const isMobile = /iPhone|Android|iPad/i.test(navigator.userAgent);
+          let whatsappUrl;
+
+          if (isMobile) {
+            // Use mobile-friendly WhatsApp link
+            whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
           } else {
-            bioShort.style.display = 'none';
-            bioFull.style.display = 'block';
-            this.textContent = 'Read Less';
+            // Use direct WhatsApp Web link for desktop users
+            whatsappUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
           }
-        });
-      });
-    </script>
-    
-    <!-- Script for WhatsApp functionality -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Get elements
-        const whatsappButton = document.getElementById('whatsappButton');
-        const whatsappPopup = document.getElementById('whatsappPopup');
-        const closeButton = document.querySelector('.whatsapp-close');
-        const startChatButton = document.getElementById('startChatButton');
 
-        // Open popup when WhatsApp button is clicked
-        if (whatsappButton) {
-          whatsappButton.addEventListener('click', () => {
-            whatsappPopup.style.display = 'block';
-          });
-        }
+          // Open WhatsApp chat in a new tab
+          const newTab = window.open(whatsappUrl, '_blank');
 
-        // Close popup when close button is clicked
-        if (closeButton) {
-          closeButton.addEventListener('click', () => {
-            whatsappPopup.style.display = 'none';
-          });
-        }
-
-        // Redirect to WhatsApp Web when Start Chat button is clicked
-        if (startChatButton) {
-          startChatButton.addEventListener('click', () => {
-            const phoneNumber = '254798681754'; // WhatsApp number
-            const message = 'Hello, I would like to chat with The Koru Mission Hospital.';
-            
-            // Detect if user is on mobile or desktop
-            const isMobile = /iPhone|Android|iPad/i.test(navigator.userAgent);
-            let whatsappUrl;
-
-            if (isMobile) {
-              // Use mobile-friendly WhatsApp link
-              whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            } else {
-              // Use direct WhatsApp Web link for desktop users
-              whatsappUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-            }
-
-            // Open WhatsApp chat in a new tab
-            const newTab = window.open(whatsappUrl, '_blank');
-
-            // If popup is blocked, open in the same tab
-            if (!newTab) {
-              window.location.href = whatsappUrl;
-            }
-
-            // Close popup after redirecting
-            whatsappPopup.style.display = 'none';
-          });
-        }
-
-        // Close popup if user clicks outside the modal
-        window.addEventListener('click', (event) => {
-          if (event.target === whatsappPopup) {
-            whatsappPopup.style.display = 'none';
+          // If popup is blocked, open in the same tab
+          if (!newTab) {
+            window.location.href = whatsappUrl;
           }
+
+          // Close popup after redirecting
+          whatsappPopup.style.display = 'none';
         });
+      }
+
+      // Close popup if user clicks outside the modal
+      window.addEventListener('click', (event) => {
+        if (event.target === whatsappPopup) {
+          whatsappPopup.style.display = 'none';
+        }
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>
