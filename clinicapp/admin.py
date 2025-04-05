@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Appointment, TeamMember, Testimonial
+from .models import Appointment, TeamMember, Testimonial, Contact
 
 # Register your models here.
 @admin.register(Appointment)
@@ -24,3 +24,9 @@ class TestimonialAdmin(admin.ModelAdmin):
     search_fields = ('name', 'position', 'content')
     list_filter = ('active', 'created_at')
     fields = ('name', 'position', 'content', 'image', 'active', 'order')
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'subject', 'created_at')
+    search_fields = ('name', 'email', 'subject')
+    list_filter = ('created_at',)

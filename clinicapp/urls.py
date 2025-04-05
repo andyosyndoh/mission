@@ -10,4 +10,5 @@ urlpatterns = [
     path('appointment/', views.book_appointment, name="appointment"),
     path('subscribe/', views.newsletter_subscribe, name='newsletter_subscribe'),
     path('confirm/<uuid:token>/', views.confirm_subscription, name='confirm_subscription'),
+    path('contact/', views.contact_view, name='contact'),
 ]
