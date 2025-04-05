@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'clinicapp.apps.ClinicappConfig',
     'blog.apps.BlogConfig',
-    'careers.apps.CareersConfig'
+    'careers.apps.CareersConfig',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
