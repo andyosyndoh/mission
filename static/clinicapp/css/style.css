@@ -6,6 +6,7 @@
  */
 :root {
   --blue: #007bff;
+  --deep: #053388;
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
@@ -11042,7 +11043,7 @@ h5,
 
 .btn.btn-primary:hover {
   border: 1px solid #2f89fc;
-  background: transparent;
+  background: var(--deep);
   color: #2f89fc;
 }
 
