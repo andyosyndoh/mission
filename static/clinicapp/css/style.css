@@ -3243,6 +3243,10 @@ input[type="button"].btn-block {
 .tab-content > .active {
   display: block; }
 
+.changes {
+  min-width: fit-content;
+}
+
 .navbar {
   position: relative;
   display: -webkit-box;
