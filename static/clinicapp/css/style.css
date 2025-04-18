@@ -10582,7 +10582,7 @@ h5,
 
 .ftco-navbar-light .navbar-nav>.nav-item.cta>a {
   color: #000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 150, 1);
   padding-top: .5rem;
   padding-bottom: .5rem;
   padding-left: 20px;
