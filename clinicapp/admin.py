@@ -4,9 +4,11 @@ from .models import Appointment, TeamMember, Testimonial, Contact
 # Register your models here.
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'date', 'time', 'created_at')
-    search_fields = ('full_name', 'email')
-    list_filter = ('date',)
+    list_display = ('full_name', 'email', 'department', 'phone', 'date', 'time', 'created_at')
+    search_fields = ('full_name', 'email', 'department', 'phone')
+    list_filter = ('date', 'department')
+    list_select_related = True
+    ordering = ('-created_at',)
 
     def has_add_permission(self, request):
         return False

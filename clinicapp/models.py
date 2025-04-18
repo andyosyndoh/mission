@@ -3,10 +3,22 @@ import uuid
 
 # Create your models here.
 class Appointment(models.Model):
+    DEPARTMENT_CHOICES = [
+        ('Outpatient Department', 'Outpatient Department'),
+        ('Emergency Department (ED)', 'Emergency Department (ED)'),
+        ('Maternity-MCH', 'Maternity-MCH'),
+        ('Pharmacy', 'Pharmacy'),
+        ('Laboratory', 'Laboratory'),
+        ('Obstetrics and Gynecology (OB/GYN)', 'Obstetrics and Gynecology (OB/GYN)'),
+        ('Inpatient Department', 'Inpatient Department'),
+        ('ICT and Health Records Department', 'ICT and Health Records Department'),
+    ]
     full_name = models.CharField(max_length=255)
     email = models.EmailField()
+    department = models.CharField(max_length=255, choices=DEPARTMENT_CHOICES, blank=True)
     date = models.DateField()
     time = models.TimeField()
+    phone = models.CharField(max_length=20, blank=True)
     message = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
