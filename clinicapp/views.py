@@ -1,31 +1,42 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
-from .forms import AppointmentForm, NewsletterForm, ContactForm
+from .forms import MainAppointmentForm, ModalAppointmentForm, NewsletterForm, ContactForm
 from .models import TeamMember, Subscriber, Testimonial
 from django.urls import reverse
 
 def book_appointment(request):
     if request.method == "POST":
-        form = AppointmentForm(request.POST)
+        # Detect which form was submitted
+        if 'department' in request.POST:  # Main form marker
+            form = MainAppointmentForm(request.POST)
+        else:  # Modal form
+            form = ModalAppointmentForm(request.POST)
+
         if form.is_valid():
             # Save to database first
             appointment = form.save()
 
             # Prepare email
             subject = f"New Appointment Request from {appointment.full_name}"
-            body = (
-                f"Full Name: {appointment.full_name}\n"
-                f"Email: {appointment.email}\n"
-                f"Date: {appointment.date}\n"
-                f"Time: {appointment.time}\n"
-                f"Message: {appointment.message}"
-            )            
+            body_lines = [
+                f"Full Name: {appointment.full_name}",
+                f"Email: {appointment.email}",
+                f"Date: {appointment.date}",
+                f"Time: {appointment.time}",
+            ]
+            
+            if appointment.department:
+                body_lines.insert(2, f"Department: {appointment.department}")
+            if appointment.phone:
+                body_lines.insert(4, f"Phone: {appointment.phone}")
+            if appointment.message:
+                body_lines.append(f"Message: {appointment.message}")            
 
             try:
                 send_mail(
                     subject,
-                    body,
+                    body_lines,
                     "noreply@korumissionhospital.com",  # Replace with your sender email
                     ["adakennedy6@gmail.com"],  # Replace with hospital's receiving email
                     fail_silently=False,
@@ -37,7 +48,7 @@ def book_appointment(request):
             return redirect("home")  # Redirect to the appointment page or any success page
 
     else:
-        form = AppointmentForm()
+        form = ModalAppointmentForm()
 
     return render(request, "home.html", {"form": form})
 
