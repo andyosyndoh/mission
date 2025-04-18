@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <!-- Optional: jQuery (for the geocoding AJAX request) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <link rel="icon" href="{% static 'clinicapp/images/favicon.ico' %}" type="image/x-icon">
+
     <!-- In your template head -->
     <link
       rel="stylesheet"
@@ -201,26 +204,15 @@
     </style>
   </head>
 
-  <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-      id="ftco-navbar"
-    >
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}"
-          >Koru Holy Family <span>Mission Hospital</span></a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#ftco-nav"
-          aria-controls="ftco-nav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="oi oi-menu"></span> Menu
-        </button>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container changes">
+      <a class="navbar-brand" href="{% url 'home' %}">Koru <span>Holy Family Mission Hospital</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
