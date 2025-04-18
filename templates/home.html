@@ -312,7 +312,7 @@
   </div>
 </section>
 
-<section class="ftco-section ftco-counter img" id="section-counter" data-stellar-background-ratio="0.5">
+<section class="ftco-section ftco-counter img" id="section-counter" data-stellar-background-ratio="0.5" style="background-color: #007bff;">
   <div class="container">
     <div class="row d-flex align-items-center">
       <div class="col-md-3 aside-stretch py-5">
@@ -363,38 +363,6 @@
   </div>
 </section>
 
-<section class="ftco-section-parallax">
-  <div class="parallax-img d-flex align-items-center">
-    <div class="container">
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-          <h2>Subcribe to our Newsletter</h2>
-          <p>
-            Stay informed about the latest health tips, medical advancements,
-            and updates from our hospital. Join our community today and take the
-            first step toward better health!
-          </p>
-          <div class="row d-flex justify-content-center mt-5">
-            <div class="col-md-8">
-              <form method="post" action="{% url 'newsletter_subscribe' %}" class="subscribe-form">
-                {% csrf_token %}
-                <div class="form-group d-flex">
-                  {{ form.email }}
-                  <!-- <input type="text" class="form-control" placeholder="Enter email address"> -->
-                  <input type="submit" value="Subscribe" class="submit px-3" />
-                </div>
-                {% if messages %} {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                {% endfor %} {% endif %}
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="ftco-section testimony-section bg-light">
   <div class="container">
     <div class="row justify-content-center mb-5 pb-3">
@@ -426,6 +394,38 @@
             </div>
           </div>
           {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section-parallax">
+  <div class="parallax-img d-flex align-items-center">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+          <h2>Subcribe to our Newsletter</h2>
+          <p>
+            Stay informed about the latest health tips, medical advancements,
+            and updates from our hospital. Join our community today and take the
+            first step toward better health!
+          </p>
+          <div class="row d-flex justify-content-center mt-5">
+            <div class="col-md-8">
+              <form method="post" action="{% url 'newsletter_subscribe' %}" class="subscribe-form">
+                {% csrf_token %}
+                <div class="form-group d-flex">
+                  {{ form.email }}
+                  <!-- <input type="text" class="form-control" placeholder="Enter email address"> -->
+                  <input type="submit" value="Subscribe" class="submit px-3" />
+                </div>
+                {% if messages %} {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %} {% endif %}
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
