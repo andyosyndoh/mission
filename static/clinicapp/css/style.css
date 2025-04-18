@@ -10851,7 +10851,7 @@ h5,
   bottom: 0;
   content: '';
   background: #000;
-  opacity: .5;
+  opacity: .2;
 }
 
 .owl-carousel.home-slider .slider-item .slider-text {
@@ -10875,7 +10875,7 @@ h5,
 .owl-carousel.home-slider .slider-item .slider-text p {
   font-size: 20px;
   line-height: 1.5;
-  font-weight: 300;
+  font-weight: 400;
   color: rgba(255, 255, 255, 0.8);
 }
 
