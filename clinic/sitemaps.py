@@ -8,7 +8,7 @@ class StaticViewSitemap(Sitemap):
     changefreq = "monthly"
 
     def items(self):
-        return ['home', 'about','services','team','contact']  # Add other static pages from your URLs
+        return ['home', 'about','services','team','contact/']  # Add other static pages from your URLs
 
     def location(self, item):
         return reverse(item)
