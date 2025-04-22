@@ -4,6 +4,8 @@ from django.contrib import messages
 from .forms import MainAppointmentForm, ModalAppointmentForm, NewsletterForm, ContactForm
 from .models import TeamMember, Subscriber, Testimonial
 from django.urls import reverse
+import logging
+logger = logging.getLogger(__name__)
 
 def book_appointment(request):
     if request.method == "POST":
@@ -36,13 +38,14 @@ def book_appointment(request):
             try:
                 send_mail(
                     subject,
-                    body_lines,
-                    "noreply@korumissionhospital.com",  # Replace with your sender email
+                    '\n'.join(body_lines),
+                    "adakennedy6@gmail.com",  # Replace with your sender email
                     ["adakennedy6@gmail.com"],  # Replace with hospital's receiving email
                     fail_silently=False,
                 )
                 messages.success(request, "Appointment booked and email sent!")
             except Exception as e:
+                logger.error(f"Email failed:  {str(e)}")
                 messages.warning(request, f"Appointment saved but email failed: {str(e)}")
                 
             return redirect("home")  # Redirect to the appointment page or any success page

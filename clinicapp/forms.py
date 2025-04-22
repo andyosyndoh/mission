@@ -1,5 +1,6 @@
 from django import forms
 from .models import Appointment, Subscriber, Contact
+from django.forms.widgets import TextInput
 
 class BaseAppointmentForm(forms.ModelForm):
     class Meta:
