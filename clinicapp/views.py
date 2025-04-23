@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
-from .forms import MainAppointmentForm, ModalAppointmentForm, NewsletterForm, ContactForm
+from .forms import BaseAppointmentForm, NewsletterForm, ContactForm
 from .models import TeamMember, Subscriber, Testimonial
 from django.urls import reverse
 import logging
@@ -9,15 +9,12 @@ logger = logging.getLogger(__name__)
 
 def book_appointment(request):
     if request.method == "POST":
-        # Detect which form was submitted
-        if 'department' in request.POST:  # Main form marker
-            form = MainAppointmentForm(request.POST)
-        else:  # Modal form
-            form = ModalAppointmentForm(request.POST)
+        form = BaseAppointmentForm(request.POST)
 
         if form.is_valid():
             # Save to database first
-            appointment = form.save()
+            appointment = form.save(commit=False)
+            appointment.save()
 
             # Prepare email
             subject = f"New Appointment Request from {appointment.full_name}"
@@ -39,19 +36,19 @@ def book_appointment(request):
                 send_mail(
                     subject,
                     '\n'.join(body_lines),
-                    "adakennedy6@gmail.com",  # Replace with your sender email
-                    ["adakennedy6@gmail.com"],  # Replace with hospital's receiving email
+                    "hmissionhospital@gmail.com",  # sender email
+                    ["hmissionhospital@gmail.com"],  # receiving email
                     fail_silently=False,
                 )
-                messages.success(request, "Appointment booked and email sent!")
+                messages.success(request, "Your appointment has been booked successfully! We'll get back to you for confirmation.")
             except Exception as e:
                 logger.error(f"Email failed:  {str(e)}")
-                messages.warning(request, f"Appointment saved but email failed: {str(e)}")
+                messages.error(request, "Something went wrong. Please try again.")
                 
             return redirect("home")  # Redirect to the appointment page or any success page
 
     else:
-        form = ModalAppointmentForm()
+        form = BaseAppointmentForm()
 
     return render(request, "home.html", {"form": form})
 
@@ -103,8 +100,30 @@ def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Your message has been sent successfully!')
+            contact = form.save(commit=False)
+
+             # Prepare email content
+            subject = f"New Contact Message from {contact.name}"
+            body_lines = [
+                f"Name: {contact.name}",
+                f"Email: {contact.email}",
+                f"Subject: {contact.subject}",
+                f"Message: {contact.message}",
+            ]
+
+            try:
+                send_mail(
+                    subject,
+                    '\n'.join(body_lines),
+                    "hmissionhospital@gmail.com",  # Sender email
+                    ["hmissionhospital@gmail.com"],  # Where hospital reads messages
+                    fail_silently=False,
+                )
+                contact.save()
+                messages.success(request, "Your message has been sent successfully!")
+            except Exception as e:
+                logger.error(f"Contact form email failed: {str(e)}")
+                messages.error(request, "Something went wrong. Please try again.")
             return redirect('contact')
     else:
         form = ContactForm()

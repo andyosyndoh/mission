@@ -5,7 +5,7 @@ from django.forms.widgets import TextInput
 class BaseAppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
-        fields = '__all__'
+        fields = ['full_name', 'email', 'department', 'date', 'time', 'phone', 'message']
 
     # Override the default widgets for date/time fields
     def __init__(self, *args, **kwargs):
@@ -18,14 +18,6 @@ class BaseAppointmentForm(forms.ModelForm):
             'class': 'flatpickr-time',
             'placeholder': 'Select Time',
         })
-
-class MainAppointmentForm(BaseAppointmentForm):
-    class Meta(BaseAppointmentForm.Meta):
-        fields = ['full_name', 'email', 'department', 'date', 'time', 'phone']
-
-class ModalAppointmentForm(BaseAppointmentForm):
-    class Meta(BaseAppointmentForm.Meta):
-        fields = ['full_name', 'email', 'date', 'time', 'message']
 
 class NewsletterForm(forms.ModelForm):
     class Meta:
