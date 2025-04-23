@@ -4,14 +4,18 @@ import uuid
 # Create your models here.
 class Appointment(models.Model):
     DEPARTMENT_CHOICES = [
-        ('Outpatient Department', 'Outpatient Department'),
-        ('Emergency Department (ED)', 'Emergency Department (ED)'),
-        ('Maternity-MCH', 'Maternity-MCH'),
-        ('Pharmacy', 'Pharmacy'),
-        ('Laboratory', 'Laboratory'),
-        ('Obstetrics and Gynecology (OB/GYN)', 'Obstetrics and Gynecology (OB/GYN)'),
-        ('Inpatient Department', 'Inpatient Department'),
-        ('ICT and Health Records Department', 'ICT and Health Records Department'),
+        ('Consultation', 'Consultation'),
+        ('Medical Services', 'Medical Services'),
+        ('Surgical Services', 'Surgical Services'),
+        ('Critical Care Services', 'Critical Care Services'),
+        ('Laboratory Investigations', 'Laboratory Investigations'),
+        ('Maternity Services', 'Maternity Services'),
+        ('Maternal and Child Health Services', 'Maternal and Child Health Services'),
+        ('HIV and TB Services', 'HIV and TB Services'),
+        ('Ambulance Services', 'Ambulance Services'),
+        ('Ultrasound', 'Ultrasound'),
+        ('Special Clinics (MOPC, GOPC, SOPC)', 'Special Clinics (MOPC, GOPC, SOPC)'),
+        ('New Born Unit', 'New Born Unit'),
     ]
     full_name = models.CharField(max_length=255)
     email = models.EmailField()
