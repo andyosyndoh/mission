@@ -101,15 +101,19 @@
                 <div class="select-wrap">
                   <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                   <select name="department" id="department" class="form-control">
-                    <option value="">Departments</option>
-                    <option value="Outpatient Department">Outpatient Department</option>
-                    <option value="Emergency Department (ED)">Emergency Department (ED)</option>
-                    <option value="Maternity-MCH">Maternity-MCH</option>
-                    <option value="Pharmacy">Pharmacy</option>
-                    <option value="Laboratory">Laboratory</option>
-                    <option value="Obstetrics and Gynecology (OB/GYN)">Obstetrics and Gynecology (OB/GYN)</option>
-                    <option value="Inpatient Department">Inpatient Department</option>
-                    <option value="ICT and Health Records Department">ICT and Health Records Department</option>
+                    <option value="" disabled selected hidden>Services</option>
+                    <option value="Consultation">Consultation</option>
+                    <option value="Medical Services">Medical Services</option>
+                    <option value="Surgical Services">Surgical Services</option>
+                    <option value="Critical Care Services">Critical Care Services</option>
+                    <option value="Laboratory Investigations">Laboratory Investigations</option>
+                    <option value="Maternity Services">Maternity Services</option>
+                    <option value="Maternal and Child Health Services">Maternal and Child Health Services</option>
+                    <option value="HIV and TB Services">HIV and TB Services</option>
+                    <option value="Ambulance Services">Ambulance Services</option>
+                    <option value="Ultrasound">Ultrasound</option>
+                    <option value="Special Clinics (MOPC, GOPC, SOPC)">Special Clinics (MOPC, GOPC, SOPC)</option>
+                    <option value="New Born Unit">New Born Unit</option>
                   </select>
                 </div>
               </div>
@@ -129,16 +133,16 @@
           </div>
           <div class="row">
             <div class="col-sm-4 form-group">
-              <!-- <div class="form-group"> -->
-                <!-- <div class="icon"><span class="ion-ios-calendar"></span></div> -->
+              <div class="form-group">
+                <div class="icon"><span class="ion-ios-calendar"></span></div>
                 <input type="date" class="form-control" name="date" id="appointment_date" placeholder="Date" required>
-              <!-- </div> -->
+              </div>
             </div>
             <div class="col-sm-4 form-group">
-              <!-- <div class="form-group"> -->
-                <!-- <div class="icon"><span class="ion-ios-clock"></span></div> -->
+              <div class="form-group">
+                <div class="icon"><span class="ion-ios-clock"></span></div>
                 <input type="time" class="form-control" name="time" id="appointment-time" placeholder="Time" required>
-              <!-- </div> -->
+              </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
@@ -146,6 +150,9 @@
                 <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" required>
               </div>
             </div>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" name="message" placeholder="Message (Optional)"></textarea>
           </div>
 
           <div class="form-group">
@@ -156,6 +163,31 @@
     </div>
   </div>
 </section>
+
+{% if messages %}
+    <div class="container mt-3">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          {% for message in messages %}
+          <div
+            class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show"
+            role="alert"
+          >
+            {{ message }}
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
 
 <section class="ftco-section ftco-services">
   <div class="container">

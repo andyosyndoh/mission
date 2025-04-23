@@ -22,7 +22,11 @@
     <!-- Optional: jQuery (for the geocoding AJAX request) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <link rel="icon" href="{% static 'clinicapp/images/favicon.ico' %}" type="image/x-icon">
+    <link
+      rel="icon"
+      href="{% static 'clinicapp/images/favicon.ico' %}"
+      type="image/x-icon"
+    />
 
     <!-- In your template head -->
     <link
@@ -70,9 +74,38 @@
         font-size: 15px !important;
       }
 
+      select:invalid {
+        color: #6c757d !important;
+      }
+
       #department option {
         color: #333 !important;
         background-color: white !important;
+      }
+
+      /* appointment form message textarea styling */
+      textarea.form-control {
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        background: transparent;
+        color: #fff;
+        padding: 5px 2px;
+        resize: none;
+        font-size: 14px;
+        box-shadow: none;
+        border-radius: 0;
+        height: 100px;
+      }
+
+      textarea.form-control::placeholder {
+        color: rgba(32, 30, 30, 0.7);
+        font-style: italic;
+      }
+
+      textarea.form-control:focus {
+        outline: none;
+        box-shadow: none;
+        border-bottom: 1px solid #fff;
       }
 
       /* Style for select dropdown options */
@@ -187,6 +220,10 @@
         cursor: pointer;
       }
 
+      #map {
+        z-index: -1;
+      }
+
       .whatsapp-close:hover {
         color: black;
       }
@@ -201,18 +238,48 @@
         border-radius: 5px;
         margin-top: 20px;
       }
+
+      /* Custom alert styling */
+      .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+      }
+
+      .alert-warning {
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+        color: #856404;
+      }
+
+      .alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+      }
     </style>
   </head>
 
-<body>
-
-  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container changes">
-      <a class="navbar-brand" href="{% url 'home' %}"><span>Koru Holy Family Mission Hospital</span></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
-      </button>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+      id="ftco-navbar"
+    >
+      <div class="container changes">
+        <a class="navbar-brand" href="{% url 'home' %}"
+          ><span>Koru Holy Family Mission Hospital</span></a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#ftco-nav"
+          aria-controls="ftco-nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="oi oi-menu"></span> Menu
+        </button>
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="navbar-nav ml-auto">
@@ -455,6 +522,33 @@
             <form action="{% url 'appointment' %}" method="POST">
               {% csrf_token %}
               <div class="form-group">
+                <select name="department" class="form-control" required>
+                  <option value="" disabled selected hidden>Services</option>
+                  <option value="Consultation">Consultation</option>
+                  <option value="Medical Services">Medical Services</option>
+                  <option value="Surgical Services">Surgical Services</option>
+                  <option value="Critical Care Services">
+                    Critical Care Services
+                  </option>
+                  <option value="Laboratory Investigations">
+                    Laboratory Investigations
+                  </option>
+                  <option value="Maternity Services">Maternity Services</option>
+                  <option value="Maternal and Child Health Services">
+                    Maternal and Child Health Services
+                  </option>
+                  <option value="HIV and TB Services">
+                    HIV and TB Services
+                  </option>
+                  <option value="Ambulance Services">Ambulance Services</option>
+                  <option value="Ultrasound">Ultrasound</option>
+                  <option value="Special Clinics (MOPC, GOPC, SOPC)">
+                    Special Clinics (MOPC, GOPC, SOPC)
+                  </option>
+                  <option value="New Born Unit">New Born Unit</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
                 <input
                   type="text"
@@ -471,6 +565,16 @@
                   class="form-control"
                   name="email"
                   placeholder="Email"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <!-- <label for="appointment_email" class="text-black">Email</label> -->
+                <input
+                  type="text"
+                  class="form-control"
+                  name="phone"
+                  placeholder="Phone"
                   required
                 />
               </div>
@@ -560,6 +664,26 @@
             this.textContent = "Read Less";
           }
         });
+      });
+    </script>
+
+    <!-- script for auto-fading alerts -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          const alerts = document.querySelectorAll(".alert");
+          alerts.forEach(function (alert) {
+            alert.classList.remove("show");
+            alert.classList.add("fade");
+            setTimeout(() => {
+              alert.remove();
+              const alertContainer = document.querySelector(".container.mt-3");
+              if (alertContainer && alertContainer.querySelectorAll(".alert").length === 0) {
+                alertContainer.remove();
+              }
+            }, 500);
+          });
+        }, 4000);
       });
     </script>
 
