@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-success">
+        <h4 class="alert-heading">Payment Successful!</h4>
+        <p>Amount: {{ transaction.amount }} {{ transaction.currency }}</p>
+        <p>Transaction ID: {{ transaction.pesapal_id }}</p>
+        <a href="/" class="btn btn-primary">Return Home</a>
+    </div>
+</div>
+{% endblock %}
