@@ -14,6 +14,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('clinicapp.urls')),
     path('blog/', include('blog.urls', namespace='blog')),
+    path('pesapal/', include('pesapal.urls', namespace='payment')),
     path('careers/', include('careers.urls', namespace='careers')),
     # Corrected sitemap configuration 👇
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='sitemap'),

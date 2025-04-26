@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'careers.apps.CareersConfig',
     'django.contrib.sitemaps',
+    'pesapal'
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,41 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "hmissionhospital@gmail.com"
 EMAIL_HOST_PASSWORD = "ytqf zrkm vqbb tnaf"
+
+ #Security settings
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    CSRF_TRUSTED_ORIGINS = [
+        'https://korumissionhospital.co.ke',
+        'https://www.korumissionhospital.co.ke',
+        'https://pesapal.com',
+        'https://cybqa.pesapal.com'
+    ]
+
+# Pesapal Payment Gateway Configuration
+PESAPAL_ENVIRONMENT = os.getenv('PESAPAL_ENVIRONMENT', 'sandbox')
+PESAPAL_CONSUMER_KEY = os.getenv('PESAPAL_CONSUMER_KEY')
+PESAPAL_CONSUMER_SECRET = os.getenv('PESAPAL_CONSUMER_SECRET')
+PESAPAL_BASE_URL = (
+    'https://cybqa.pesapal.com/pesapalv3' 
+    if PESAPAL_ENVIRONMENT == 'sandbox' 
+    else 'https://pay.pesapal.com/v3'
+)
+PESAPAL_CALLBACK_URL = os.getenv(
+    'PESAPAL_CALLBACK_URL',
+    'http://localhost:8000/pesapal/callback/' if DEBUG 
+    else 'https://korumissionhospital.co.ke/pesapal/callback/'
+)
+PESAPAL_IPN_URL = os.getenv(
+    'PESAPAL_IPN_URL',
+    'http://localhost:8000/pesapal/ipn/' if DEBUG 
+    else 'https://korumissionhospital.co.ke/pesapal/ipn/'
+)
+
+# Default primary key field
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PESAPAL_DONATION_DESCRIPTION = 'Donation Description'
