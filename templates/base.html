@@ -531,7 +531,7 @@
     <div class="modal fade" id="pesapalPaymentModal" tabindex="-1" aria-labelledby="pesapalModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <form method="post" action="{% url 'donations:initiate_donation' %}" id="donationForm">
+          <form action="{% url 'donations:initiate_donation' %}" method="post" id="donationForm">
             {% csrf_token %}
             <div class="modal-header bg-primary text-white">
               <h5 class="modal-title" id="pesapalModalLabel">
@@ -623,7 +623,7 @@
     
               <div class="mb-3">
                 <label class="form-label fw-bold">Donation Purpose</label>
-                <select name="purpose" class="form-select">
+                <selmect name="purpose" class="form-select">
                   <option value="General Donation">General Donation</option>
                   <option value="Medical Equipment">Medical Equipment</option>
                   <option value="Patient Support">Patient Support</option>
@@ -641,57 +641,7 @@
           </form>
         </div>
       </div>
-    </div>
-<!--     
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const currencySelect = document.getElementById('currencySelect');
-        const mpesaSection = document.getElementById('mpesaSection');
-        const cardSection = document.getElementById('cardSection');
-    
-        function updatePaymentMethods() {
-            if (currencySelect.value === 'KES') {
-                mpesaSection.style.display = 'block';
-                cardSection.style.display = 'none';
-                // Make M-Pesa fields required
-                document.querySelector('[name="mpesa_number"]').required = true;
-                document.querySelector('[name="card_number"]').required = false;
-            } else {
-                mpesaSection.style.display = 'none';
-                cardSection.style.display = 'block';
-                // Make card fields required
-                document.querySelector('[name="mpesa_number"]').required = false;
-                document.querySelector('[name="card_number"]').required = true;
-                document.querySelector('[name="expiry"]').required = true;
-                document.querySelector('[name="cvc"]').required = true;
-            }
-        }
-    
-        // Initial update
-        updatePaymentMethods();
-        
-        // Update on currency change
-        currencySelect.addEventListener('change', updatePaymentMethods);
-    
-        // Form validation
-        document.getElementById('donationForm').addEventListener('submit', function(e) {
-            if (currencySelect.value === 'KES' && !document.querySelector('[name="mpesa_number"]').value) {
-                alert('Please enter your M-Pesa number');
-                e.preventDefault();
-            }
-            
-            if (currencySelect.value !== 'KES' && (
-                !document.querySelector('[name="card_number"]').value ||
-                !document.querySelector('[name="expiry"]').value ||
-                !document.querySelector('[name="cvc"]').value
-            )) {
-                alert('Please complete all card details');
-                e.preventDefault();
-            }
-        });
-    });
-    </script> -->
-    
+    </div>    
     <style>
     .payment-method {
         border: 1px solid #dee2e6;
