@@ -1,12 +1,11 @@
-# donations/views.py
+import json
+import logging
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import JsonResponse
 from django.urls import reverse
-from django.conf import settings
 from django.contrib import messages
 from django.db import transaction
-import logging
 from .models import Donation
 from .services import PesapalGateway
 
@@ -14,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 @transaction.atomic
 def initiate_donation(request):
-    """Handle donation form submission and initiate Pesapal payment"""
+    """Handle donation form submission"""
     if request.method == 'POST':
         try:
             # Create donation record
@@ -24,41 +23,30 @@ def initiate_donation(request):
                 phone=request.POST.get('phone'),
                 amount=request.POST.get('amount'),
                 currency=request.POST.get('currency'),
-                purpose=request.POST.get('purpose'),
                 mpesa_number=request.POST.get('mpesa_number', '')
             )
 
-            # Initialize Pesapal gateway
+            # Prepare Pesapal order data
             pesapal = PesapalGateway()
-            callback_url = request.build_absolute_uri(reverse('donations:payment_callback'))
-
-            # Prepare order data
             order_data = {
+                'reference': donation.id,
                 'amount': donation.amount,
                 'currency': donation.currency,
-                'description': f"Donation for {donation.purpose}",
-                'reference': str(donation.id),
+                'description': f"Donation from {donation.full_name}",
                 'email': donation.email,
-                'phone_number': donation.mpesa_number if donation.currency == 'KES' else donation.phone,
-                'callback_url': callback_url,
-                'billing_address': {
-                    'first_name': donation.full_name.split()[0],
-                    'last_name': ' '.join(donation.full_name.split()[1:]) if len(donation.full_name.split()) > 1 else '',
-                    'country_code': 'KE' if donation.currency == 'KES' else 'US'
-                }
+                'phone': donation.mpesa_number if donation.currency == 'KES' else donation.phone,
+                'country_code': 'KE' if donation.currency == 'KES' else 'US',
+                'first_name': donation.full_name.split()[0],
+                'last_name': ' '.join(donation.full_name.split()[1:]) if len(donation.full_name.split()) > 1 else '',
             }
 
-            # Get Pesapal payment URL
+            # Get Pesapal redirect URL
             redirect_url = pesapal.create_order(order_data)
-            if not redirect_url:
-                messages.error(request, "Failed to initialize payment gateway")
-                return redirect('donations:payment_failed')
-
             return redirect(redirect_url)
 
         except Exception as e:
             logger.error(f"Donation initiation failed: {str(e)}", exc_info=True)
-            messages.error(request, f"Payment initialization failed: {str(e)}")
+            messages.error(request, "Payment initialization failed. Please try again.")
             return redirect('donations:payment_failed')
 
     messages.warning(request, "Invalid request method")
@@ -66,79 +54,83 @@ def initiate_donation(request):
 
 @csrf_exempt
 def payment_callback(request):
-    """Handle Pesapal payment callback"""
+    """Handle Pesapal callback redirect"""
     try:
-        merchant_reference = request.GET.get('OrderTrackingId')
-        if not merchant_reference:
-            logger.error("Missing OrderTrackingId in callback")
+        tracking_id = request.GET.get('OrderTrackingId')
+        merchant_reference = request.GET.get('OrderMerchantReference')
+
+        if not tracking_id or not merchant_reference:
+            logger.error("Missing tracking ID or merchant reference in callback")
             return redirect('donations:payment_failed')
 
+        # Retrieve donation using your internal reference (merchant_reference)
         donation = Donation.objects.get(id=merchant_reference)
-        donation.pesapal_transaction_id = request.GET.get('OrderMerchantReference', '')
-        
-        # Update status based on Pesapal response
-        status = request.GET.get('status', 'pending').lower()
-        donation.status = 'completed' if status == 'completed' else 'failed'
+        donation.pesapal_tracking_id = tracking_id
+        donation.status = 'pending_verification'
         donation.save()
 
-        if donation.status == 'completed':
-            messages.success(request, "Payment completed successfully!")
-            return redirect('donations:payment_success')
-        else:
-            messages.warning(request, "Payment processing not completed")
-            return redirect('donations:payment_failed')
+        messages.info(request, "Payment received. Processing confirmation...")
+        return redirect('donations:payment_success')
 
     except Donation.DoesNotExist:
         logger.error(f"Donation not found for reference: {merchant_reference}")
         messages.error(request, "Invalid transaction reference")
         return redirect('donations:payment_failed')
-    except Exception as e:
-        logger.error(f"Callback handling failed: {str(e)}", exc_info=True)
-        messages.error(request, "Payment verification failed")
-        return redirect('donations:payment_failed')
+
 
 @csrf_exempt
 def ipn_handler(request):
-    """Handle Instant Payment Notification (IPN) from Pesapal"""
+    """Handle Instant Payment Notification (IPN)"""
     if request.method == 'POST':
         try:
-            ipn_data = request.POST.dict()
-            logger.info(f"Received IPN: {ipn_data}")
+            content_type = request.META.get('CONTENT_TYPE', '')
+            raw_body = request.body.decode('utf-8')
+            logger.info(f"Content-Type: {content_type}")
+            logger.info(f"Raw IPN body: {raw_body}")
 
-            merchant_reference = ipn_data.get('OrderNotificationMerchantReference')
+            # Parse JSON or form data depending on Pesapal's content type
+            if 'application/json' in content_type:
+                ipn_data = json.loads(raw_body)
+            elif 'application/x-www-form-urlencoded' in content_type:
+                ipn_data = request.POST
+            else:
+                logger.error("Unsupported content type")
+                return JsonResponse({'error': 'Unsupported content type'}, status=400)
+
+            # Extract data
+            tracking_id = ipn_data.get('OrderMerchantReference')
             transaction_id = ipn_data.get('TransactionId')
             status = ipn_data.get('OrderStatus', '').lower()
 
-            if not all([merchant_reference, transaction_id, status]):
-                logger.error("Invalid IPN data received")
-                return HttpResponseBadRequest("Invalid IPN data")
+            if not all([tracking_id, transaction_id, status]):
+                logger.error("Missing parameters in IPN")
+                return JsonResponse({'error': 'Missing parameters'}, status=400)
 
-            donation = Donation.objects.get(id=merchant_reference)
-            donation.pesapal_transaction_id = transaction_id
+            # Update donation
+            donation = Donation.objects.get(id=tracking_id)
+            donation.pesapal_tracking_id = transaction_id
             donation.status = status
             donation.save()
 
-            logger.info(f"Updated donation {donation.id} status to {status}")
-            return HttpResponse(status=200)
+            return JsonResponse({'status': 'success'}, status=200)
 
+        except json.JSONDecodeError:
+            logger.error("Invalid JSON in IPN")
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
         except Donation.DoesNotExist:
-            logger.error(f"IPN: Donation not found - {merchant_reference}")
-            return HttpResponse(status=404)
+            logger.error(f"IPN: Donation not found - {tracking_id}")
+            return JsonResponse({'error': 'Donation not found'}, status=404)
         except Exception as e:
             logger.error(f"IPN handling failed: {str(e)}", exc_info=True)
-            return HttpResponse(status=500)
+            return JsonResponse({'error': 'Server error'}, status=500)
 
-    return HttpResponse(status=405)
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
+
 
 def payment_success(request):
-    """Display payment success page"""
-    return render(request, 'donations/payment_success.html')
+    """Display success page"""
+    return render(request, 'donations/success.html')
 
 def payment_failed(request):
-    """Display payment failed page"""
-    return render(request, 'donations/payment_failed.html')
-
-def donation_list(request):
-    """View all donations (protect this in production)"""
-    donations = Donation.objects.all().order_by('-created_at')
-    return render(request, 'donations/list.html', {'donations': donations})
+    """Display failure page"""
+    return render(request, 'donations/failed.html')
