@@ -102,23 +102,33 @@ def ipn_handler(request):
     """Handle Instant Payment Notification (IPN) from Pesapal"""
     if request.method == 'POST':
         try:
-            # Parse JSON data from request body
-            ipn_data = json.loads(request.body)
+            ipn_data = request.POST.dict()
             logger.info(f"Received IPN: {ipn_data}")
-            
-            merchant_reference = ipn_data.get('OrderMerchantReference')
+
+            merchant_reference = ipn_data.get('OrderNotificationMerchantReference')
             transaction_id = ipn_data.get('TransactionId')
             status = ipn_data.get('OrderStatus', '').lower()
-            
+
             if not all([merchant_reference, transaction_id, status]):
-                return JsonResponse({'error': 'Missing parameters'}, status=400)
-            
+                logger.error("Invalid IPN data received")
+                return HttpResponseBadRequest("Invalid IPN data")
+
             donation = Donation.objects.get(id=merchant_reference)
             donation.pesapal_transaction_id = transaction_id
             donation.status = status
             donation.save()
-            
-            return JsonResponse({'status': 'success'}, status=200)
+
+            logger.info(f"Updated donation {donation.id} status to {status}")
+            return HttpResponse(status=200)
+
+        except Donation.DoesNotExist:
+            logger.error(f"IPN: Donation not found - {merchant_reference}")
+            return HttpResponse(status=404)
+        except Exception as e:
+            logger.error(f"IPN handling failed: {str(e)}", exc_info=True)
+            return HttpResponse(status=500)
+
+    return HttpResponse(status=405)
 
 def payment_success(request):
     """Display payment success page"""
