@@ -1,903 +1,822 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Koru Mission Hospital</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta
-      name="google-site-verification"
-      content="qO04RQnpyk42Hnf_HZu4r5EU_qJlK41Nfn3XNiM6h6A"
-    />
 
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700"
-      rel="stylesheet"
-    />
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <!-- Optional: jQuery (for the geocoding AJAX request) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<head>
+  <title>Koru Mission Hospital</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="google-site-verification" content="qO04RQnpyk42Hnf_HZu4r5EU_qJlK41Nfn3XNiM6h6A" />
 
-    <link
-      rel="icon"
-      href="{% static 'clinicapp/images/favicon.ico' %}"
-      type="image/x-icon"
-    />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Optional: jQuery (for the geocoding AJAX request) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- In your template head -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <link rel="icon" href="{% static 'clinicapp/images/favicon.ico' %}" type="image/x-icon" />
 
-    <link
-      rel="stylesheet"
-      href="{% static 'clinicapp/css/open-iconic-bootstrap.min.css' %}"
-    />
-    <link rel="stylesheet" href="{% static 'clinicapp/css/animate.css' %}" />
-    <link
-      rel="stylesheet"
-      href="{% static 'clinicapp/css/owl.carousel.min.css' %}"
-    />
-    <link
-      rel="stylesheet"
-      href="{% static 'clinicapp/css/owl.theme.default.min.css' %}"
-    />
-    <link
-      rel="stylesheet"
-      href="{% static 'clinicapp/css/magnific-popup.css' %}"
-    />
-    <link rel="stylesheet" href="{% static 'clinicapp/css/aos.css' %}" />
-    <link
-      rel="stylesheet"
-      href="{% static 'clinicapp/css/ionicons.min.css' %}"
-    />
-    <link
-      rel="stylesheet"
-      href="{% static 'clinicapp/css/bootstrap-datepicker.css' %}"
-    />
-    <link
-      rel="stylesheet"
-      href="{% static 'clinicapp/css/jquery.timepicker.css' %}"
-    />
-    <link rel="stylesheet" href="{% static 'clinicapp/css/flaticon.css' %}" />
-    <link rel="stylesheet" href="{% static 'clinicapp/css/icomoon.css' %}" />
-    <link rel="stylesheet" href="{% static 'clinicapp/css/style.css' %}" />
-    <!-- Add to head section -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- In your template head -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    <style>
-      .navbar .nav-link {
-        font-size: 15px !important;
+  <link rel="stylesheet" href="{% static 'clinicapp/css/open-iconic-bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'clinicapp/css/animate.css' %}" />
+  <link rel="stylesheet" href="{% static 'clinicapp/css/owl.carousel.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'clinicapp/css/owl.theme.default.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'clinicapp/css/magnific-popup.css' %}" />
+  <link rel="stylesheet" href="{% static 'clinicapp/css/aos.css' %}" />
+  <link rel="stylesheet" href="{% static 'clinicapp/css/ionicons.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'clinicapp/css/bootstrap-datepicker.css' %}" />
+  <link rel="stylesheet" href="{% static 'clinicapp/css/jquery.timepicker.css' %}" />
+  <link rel="stylesheet" href="{% static 'clinicapp/css/flaticon.css' %}" />
+  <link rel="stylesheet" href="{% static 'clinicapp/css/icomoon.css' %}" />
+  <link rel="stylesheet" href="{% static 'clinicapp/css/style.css' %}" />
+  <!-- Add to head section -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    .navbar .nav-link {
+      font-size: 15px !important;
+    }
+
+    select:invalid {
+      color: #6c757d !important;
+    }
+
+    #department option {
+      color: #333 !important;
+      background-color: white !important;
+    }
+
+    /* appointment form message textarea styling */
+    textarea.form-control {
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      background: transparent;
+      color: #fff;
+      padding: 5px 2px;
+      resize: none;
+      font-size: 14px;
+      box-shadow: none;
+      border-radius: 0;
+      height: 100px;
+    }
+
+    textarea.form-control::placeholder {
+      color: rgba(32, 30, 30, 0.7);
+      font-style: italic;
+    }
+
+    textarea.form-control:focus {
+      outline: none;
+      box-shadow: none;
+      border-bottom: 1px solid #fff;
+    }
+
+    /* Style for select dropdown options */
+    select#department option {
+      padding: 10px !important;
+    }
+
+    input[type="date"],
+    input[type="time"],
+    input[type="datetime-local"],
+    .datepicker,
+    .timepicker {
+      color: white !important;
+      background-color: transparent !important;
+      /* Optional: if you want transparent background */
+    }
+
+    /* Style the calendar/dropdown icons */
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="time"]::-webkit-calendar-picker-indicator,
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      /* This inverts the color of the icon, making it white */
+    }
+
+    /* Custom styles for Flatpickr */
+    .flatpickr-calendar {
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .flatpickr-day.selected {
+      background: #007bff;
+      /* Match your site's primary color */
+      border-color: #007bff;
+    }
+
+    /* Make input styling match your department dropdown */
+    .flatpickr-input {
+      padding: 10px 15px;
+      /* border: 1px solid #ced4da; */
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    /* WhatsApp Button Styling */
+    #whatsappButton {
+      background-color: #25d366;
+      /* WhatsApp green */
+      color: white;
+      border: none;
+      padding: 8px 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 50px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* WhatsApp Icon */
+    #whatsappButton i {
+      font-size: 20px;
+    }
+
+    /* WhatsApp Modal Styling */
+    .whatsapp-modal {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Black with opacity */
+    }
+
+    .whatsapp-modal-content {
+      background-color: rgb(250, 246, 246);
+      padding: 20px;
+      max-width: 400px;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 50px;
+      position: fixed;
+      bottom: 80px;
+      /* Adjusted to be above WhatsApp button */
+      right: 20px;
+      z-index: 1000;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .whatsapp-close {
+      color: #0c0c0c;
+      align-self: flex-end;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #map {
+      z-index: -1;
+    }
+
+    .whatsapp-close:hover {
+      color: black;
+    }
+
+    #startChatButton {
+      background-color: #25d366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    /* Custom alert styling */
+    .alert-success {
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+      color: #155724;
+    }
+
+    .alert-warning {
+      background-color: #fff3cd;
+      border-color: #ffeeba;
+      color: #856404;
+    }
+
+    .alert-danger {
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+      color: #721c24;
+    }
+
+    .transaction-details {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .success-icon {
+      animation: bounce 1s ease-in-out;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0);
       }
 
-      select:invalid {
-        color: #6c757d !important;
+      40% {
+        transform: translateY(-30px);
       }
 
-      #department option {
-        color: #333 !important;
-        background-color: white !important;
+      60% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .error-icon {
+      animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0);
       }
 
-      /* appointment form message textarea styling */
-      textarea.form-control {
-        border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-        background: transparent;
-        color: #fff;
-        padding: 5px 2px;
-        resize: none;
-        font-size: 14px;
-        box-shadow: none;
-        border-radius: 0;
-        height: 100px;
+      25% {
+        transform: translateX(-10px);
       }
 
-      textarea.form-control::placeholder {
-        color: rgba(32, 30, 30, 0.7);
-        font-style: italic;
+      75% {
+        transform: translateX(10px);
       }
+    }
 
-      textarea.form-control:focus {
-        outline: none;
-        box-shadow: none;
-        border-bottom: 1px solid #fff;
-      }
+    .card-header {
+      border-radius: 8px 8px 0 0 !important;
+    }
+  </style>
+</head>
 
-      /* Style for select dropdown options */
-      select#department option {
-        padding: 10px !important;
-      }
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container changes">
+      <a class="navbar-brand" href="{% url 'home' %}"><span>Koru Holy Family Mission Hospital</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
 
-      input[type="date"],
-      input[type="time"],
-      input[type="datetime-local"],
-      .datepicker,
-      .timepicker {
-        color: white !important;
-        background-color: transparent !important; /* Optional: if you want transparent background */
-      }
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item {% if request.resolver_match.view_name == 'home' %}active{% endif %}">
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item {% if request.resolver_match.view_name == 'about' %}active{% endif %}">
+            <a href="{% url 'about' %}" class="nav-link">About</a>
+          </li>
+          <li class="nav-item {% if request.resolver_match.view_name == 'services' %}active{% endif %}">
+            <a href="{% url 'services' %}" class="nav-link">Services</a>
+          </li>
+          <li class="nav-item {% if request.resolver_match.view_name == 'team' %}active{% endif %}">
+            <a href="{% url 'team' %}" class="nav-link">Our Team</a>
+          </li>
+          <li class="nav-item {% if 'careers' in request.resolver_match.view_name %}active{% endif %}">
+            <a href="{% url 'careers:careers_list' %}" class="nav-link">Careers</a>
+          </li>
+          <li class="nav-item {% if 'blog' in request.resolver_match.view_name %}active{% endif %}">
+            <a href="{% url 'blog:blog_home' %}" class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item {% if request.resolver_match.view_name == 'contact' %}active{% endif %}">
+            <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+          </li>
+          <li class="nav-item cta">
+            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#pesapalPaymentModal">
+              <span>Donate</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
 
-      /* Style the calendar/dropdown icons */
-      input[type="date"]::-webkit-calendar-picker-indicator,
-      input[type="time"]::-webkit-calendar-picker-indicator,
-      input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-        filter: invert(
-          1
-        ); /* This inverts the color of the icon, making it white */
-      }
+  {% block content %} {% endblock %}
 
-      /* Custom styles for Flatpickr */
-      .flatpickr-calendar {
-        border-radius: 4px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .flatpickr-day.selected {
-        background: #007bff; /* Match your site's primary color */
-        border-color: #007bff;
-      }
-
-      /* Make input styling match your department dropdown */
-      .flatpickr-input {
-        padding: 10px 15px;
-        /* border: 1px solid #ced4da; */
-        border-radius: 4px;
-        width: 100%;
-      }
-
-      /* WhatsApp Button Styling */
-      #whatsappButton {
-        background-color: #25d366;
-        /* WhatsApp green */
-        color: white;
-        border: none;
-        padding: 8px 10px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        border-radius: 50px;
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      /* WhatsApp Icon */
-      #whatsappButton i {
-        font-size: 20px;
-      }
-
-      /* WhatsApp Modal Styling */
-      .whatsapp-modal {
-        display: none;
-        /* Hidden by default */
-        position: fixed;
-        z-index: 1001;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.5);
-        /* Black with opacity */
-      }
-
-      .whatsapp-modal-content {
-        background-color: rgb(250, 246, 246);
-        padding: 20px;
-        max-width: 400px;
-        border-radius: 20px;
-        text-align: center;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        border-radius: 50px;
-        position: fixed;
-        bottom: 80px;
-        /* Adjusted to be above WhatsApp button */
-        right: 20px;
-        z-index: 1000;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .whatsapp-close {
-        color: #0c0c0c;
-        align-self: flex-end;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      #map {
-        z-index: -1;
-      }
-
-      .whatsapp-close:hover {
-        color: black;
-      }
-
-      #startChatButton {
-        background-color: #25d366;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px;
-        margin-top: 20px;
-      }
-
-      /* Custom alert styling */
-      .alert-success {
-        background-color: #d4edda;
-        border-color: #c3e6cb;
-        color: #155724;
-      }
-
-      .alert-warning {
-        background-color: #fff3cd;
-        border-color: #ffeeba;
-        color: #856404;
-      }
-
-      .alert-danger {
-        background-color: #f8d7da;
-        border-color: #f5c6cb;
-        color: #721c24;
-      }
-
-      .transaction-details {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px 0;
-}
-
-.success-icon {
-    animation: bounce 1s ease-in-out;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-    40% {transform: translateY(-30px);}
-    60% {transform: translateY(-15px);}
-}
-
-.error-icon {
-    animation: shake 0.5s ease-in-out;
-}
-
-@keyframes shake {
-    0%, 100% {transform: translateX(0);}
-    25% {transform: translateX(-10px);}
-    75% {transform: translateX(10px);}
-}
-
-.card-header {
-    border-radius: 8px 8px 0 0 !important;
-}
-    </style>
-  </head>
-
-  <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-      id="ftco-navbar"
-    >
-      <div class="container changes">
-        <a class="navbar-brand" href="{% url 'home' %}"
-          ><span>Koru Holy Family Mission Hospital</span></a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#ftco-nav"
-          aria-controls="ftco-nav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="oi oi-menu"></span> Menu
-        </button>
-
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li
-              class="nav-item {% if request.resolver_match.view_name == 'home' %}active{% endif %}"
-            >
-              <a href="{% url 'home' %}" class="nav-link">Home</a>
+  <footer class="ftco-footer ftco-bg-dark ftco-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-3">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">KoruMission.</h2>
+            <p>
+              To provide healthcare services in a fiscally responsible manner
+              which contributes to the physical, psychological, social and
+              spiritual wellbeing of the patients and community we serve.
+            </p>
+          </div>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+            <li class="ftco-animate">
+              <a href="#"><span class="icon-twitter"></span></a>
             </li>
-            <li
-              class="nav-item {% if request.resolver_match.view_name == 'about' %}active{% endif %}"
-            >
-              <a href="{% url 'about' %}" class="nav-link">About</a>
+            <li class="ftco-animate">
+              <a href="#"><span class="icon-facebook"></span></a>
             </li>
-            <li
-              class="nav-item {% if request.resolver_match.view_name == 'services' %}active{% endif %}"
-            >
-              <a href="{% url 'services' %}" class="nav-link">Services</a>
-            </li>
-            <li
-              class="nav-item {% if request.resolver_match.view_name == 'team' %}active{% endif %}"
-            >
-              <a href="{% url 'team' %}" class="nav-link">Our Team</a>
-            </li>
-            <li
-              class="nav-item {% if 'careers' in request.resolver_match.view_name %}active{% endif %}"
-            >
-              <a href="{% url 'careers:careers_list' %}" class="nav-link"
-                >Careers</a
-              >
-            </li>
-            <li
-              class="nav-item {% if 'blog' in request.resolver_match.view_name %}active{% endif %}"
-            >
-              <a href="{% url 'blog:blog_home' %}" class="nav-link">Blog</a>
-            </li>
-            <li
-              class="nav-item {% if request.resolver_match.view_name == 'contact' %}active{% endif %}"
-            >
-              <a href="{% url 'contact' %}" class="nav-link">Contact</a>
-            </li>
-            <li class="nav-item cta">
-              <a href="#" 
-   class="nav-link" 
-   data-bs-toggle="modal" 
-   data-bs-target="#pesapalPaymentModal">
-  <span>Donate</span>
-</a>
+            <li class="ftco-animate">
+              <a href="#"><span class="icon-instagram"></span></a>
             </li>
           </ul>
         </div>
-      </div>
-    </nav>
-    <!-- END nav -->
-
-    {% block content %} {% endblock %}
-
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-3">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">KoruMission.</h2>
-              <p>
-                To provide healthcare services in a fiscally responsible manner
-                which contributes to the physical, psychological, social and
-                spiritual wellbeing of the patients and community we serve.
-              </p>
-            </div>
-            <ul
-              class="ftco-footer-social list-unstyled float-md-left float-lft"
-            >
-              <li class="ftco-animate">
-                <a href="#"><span class="icon-twitter"></span></a>
+        <div class="col-md-2">
+          <div class="ftco-footer-widget mb-4 ml-md-5">
+            <h2 class="ftco-heading-2">Quick Links</h2>
+            <ul class="list-unstyled">
+              <li>
+                <a href="{% url 'about' %}" class="py-2 d-block">About</a>
               </li>
-              <li class="ftco-animate">
-                <a href="#"><span class="icon-facebook"></span></a>
+              <li>
+                <a href="{% url 'blog:blog_home' %}" class="py-2 d-block">Blog</a>
               </li>
-              <li class="ftco-animate">
-                <a href="#"><span class="icon-instagram"></span></a>
+              <li>
+                <a href="{% url 'contact' %}" class="py-2 d-block">Contact</a>
               </li>
             </ul>
           </div>
-          <div class="col-md-2">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Quick Links</h2>
-              <ul class="list-unstyled">
+        </div>
+        <div class="col-md-4 pr-md-4">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Recent Blog</h2>
+            {% for recent_post in recent_posts %}
+            <div class="block-21 mb-4 d-flex">
+              <a class="blog-img mr-4" style="background-image: url('{{ recent_post.image.url }}');"></a>
+              <div class="text">
+                <h3 class="heading">
+                  <a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a>
+                </h3>
+                <div class="meta">
+                  <div>
+                    <a href="#"><span class="icon-calendar"></span> Sept 15, 2024</a>
+                  </div>
+                  <div>
+                    <a href="#"><span class="icon-person"></span> Admin</a>
+                  </div>
+                  <div>
+                    <a href="#"><span class="icon-chat"></span> 19</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Office</h2>
+            <div class="block-23 mb-3">
+              <ul>
                 <li>
-                  <a href="{% url 'about' %}" class="py-2 d-block">About</a>
+                  <span class="icon icon-map-marker"></span><span class="text">Koru, Kenya</span>
                 </li>
                 <li>
-                  <a href="{% url 'blog:blog_home' %}" class="py-2 d-block"
-                    >Blog</a
-                  >
+                  <a href="#"><span class="icon icon-phone"></span><span class="text">+254 116 400 152</span></a>
                 </li>
                 <li>
-                  <a href="{% url 'contact' %}" class="py-2 d-block">Contact</a>
+                  <a href="#"><span class="icon icon-envelope"></span><span
+                      class="text">hmissionhospital@gmail.com</span></a>
                 </li>
               </ul>
             </div>
           </div>
-          <div class="col-md-4 pr-md-4">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Recent Blog</h2>
-              {% for recent_post in recent_posts %}
-              <div class="block-21 mb-4 d-flex">
-                <a
-                  class="blog-img mr-4"
-                  style="background-image: url('{{ recent_post.image.url }}');"
-                ></a>
-                <div class="text">
-                  <h3 class="heading">
-                    <a href="{{ recent_post.get_absolute_url }}"
-                      >{{ recent_post.title }}</a
-                    >
-                  </h3>
-                  <div class="meta">
-                    <div>
-                      <a href="#"
-                        ><span class="icon-calendar"></span> Sept 15, 2024</a
-                      >
-                    </div>
-                    <div>
-                      <a href="#"><span class="icon-person"></span> Admin</a>
-                    </div>
-                    <div>
-                      <a href="#"><span class="icon-chat"></span> 19</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Office</h2>
-              <div class="block-23 mb-3">
-                <ul>
-                  <li>
-                    <span class="icon icon-map-marker"></span
-                    ><span class="text">Koru, Kenya</span>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><span class="icon icon-phone"></span
-                      ><span class="text">+254 116 400 152</span></a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><span class="icon icon-envelope"></span
-                      ><span class="text">hmissionhospital@gmail.com</span></a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p>
-              Copyright &copy;
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              All rights reserved | Koru Mission Hospital
-            </p>
-          </div>
         </div>
       </div>
-    </footer>
-
-    <!-- WhatsApp Floating Button -->
-    <button id="whatsappButton"><i class="icon-whatsapp"></i> WhatsApp</button>
-
-    <!-- WhatsApp Popup Modal -->
-    <div id="whatsappPopup" class="whatsapp-modal">
-      <div class="whatsapp-modal-content">
-        <span class="whatsapp-close">&times;</span>
-        <p>Welcome to The Koru Mission Hospital.</p>
-        <p>We Reply within 24 Hours.</p>
-        <br /><br />
-        <p>Thank You For Contacting Us</p>
-        <button id="startChatButton">Start Chat</button>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p>
+            Copyright &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            All rights reserved | Koru Mission Hospital
+          </p>
+        </div>
       </div>
     </div>
+  </footer>
 
-    <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen">
-      <svg class="circular" width="48px" height="48px">
-        <circle
-          class="path-bg"
-          cx="24"
-          cy="24"
-          r="22"
-          fill="none"
-          stroke-width="4"
-          stroke="#eeeeee"
-        />
-        <circle
-          class="path"
-          cx="24"
-          cy="24"
-          r="22"
-          fill="none"
-          stroke-width="4"
-          stroke-miterlimit="10"
-          stroke="#F96D00"
-        />
-      </svg>
+  <!-- WhatsApp Floating Button -->
+  <button id="whatsappButton"><i class="icon-whatsapp"></i> WhatsApp</button>
+
+  <!-- WhatsApp Popup Modal -->
+  <div id="whatsappPopup" class="whatsapp-modal">
+    <div class="whatsapp-modal-content">
+      <span class="whatsapp-close">&times;</span>
+      <p>Welcome to The Koru Mission Hospital.</p>
+      <p>We Reply within 24 Hours.</p>
+      <br /><br />
+      <p>Thank You For Contacting Us</p>
+      <button id="startChatButton">Start Chat</button>
     </div>
+  </div>
 
-    <!-- Donation modal -->
-    <div class="modal fade" id="pesapalPaymentModal" tabindex="-1" aria-labelledby="pesapalModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <form action="{% url 'donations:initiate_donation' %}" method="post" id="donationForm">
-            {% csrf_token %}
-            <div class="modal-header bg-primary text-white">
-              <h5 class="modal-title" id="pesapalModalLabel">
-                <i class="fas fa-hand-holding-heart me-2"></i>
-                Support Our Mission
-              </h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+        stroke="#F96D00" />
+    </svg>
+  </div>
+
+  <!-- Donation modal -->
+  <div class="modal fade" id="pesapalPaymentModal" tabindex="-1" aria-labelledby="pesapalModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form action="{% url 'donations:initiate_donation' %}" method="post" id="donationForm">
+          {% csrf_token %}
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="pesapalModalLabel">
+              <i class="fas fa-hand-holding-heart me-2"></i>
+              Support Our Mission
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="alert alert-info">
+              <i class="fas fa-info-circle me-2"></i>
+              Your donation supports healthcare services for underserved communities
             </div>
-            
-            <div class="modal-body">
-              <div class="alert alert-info">
-                <i class="fas fa-info-circle me-2"></i>
-                Your donation supports healthcare services for underserved communities
-              </div>
-    
-              <!-- Personal Details (Always Visible) -->
-              <div class="mb-3">
-                <label class="form-label fw-bold">Full Name</label>
-                <input type="text" name="full_name" class="form-control" required>
-              </div>
-    
-              <div class="mb-3">
-                <label class="form-label fw-bold">Email Address</label>
-                <input type="email" name="email" class="form-control" required>
-              </div>
-    
-              <div class="mb-3">
-                <label class="form-label fw-bold">Phone Number</label>
-                <input type="tel" name="phone" class="form-control" required>
-              </div>
-    
-              <!-- Donation Details -->
-              <div class="mb-3">
-                <label class="form-label fw-bold">Donation Amount</label>
-                <div class="input-group">
-                  <select name="currency" class="form-select" id="currencySelect" required style="max-width: 150px;">
-                    <option value="KES" selected>KES</option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                  </select>
-                  <input type="number" 
-                         name="amount" 
-                         class="form-control" 
-                         required
-                         step="0.01"
-                         min="1"
-                         placeholder="Enter amount">
-                </div>
-              </div>
-    
-              <!-- Payment Method Sections -->
-              <div id="mpesaSection" class="payment-method">
-                <div class="alert alert-warning">
-                  <i class="fas fa-mobile-alt me-2"></i>
-                  You will receive an M-Pesa prompt on your phone
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold">M-Pesa Number</label>
-                  <input type="tel" name="mpesa_number" class="form-control" pattern="[0-9]{10}" 
-                         title="Enter 10-digit M-Pesa number (e.g., 07XXXXXXXX)">
-                </div>
-              </div>
-    
-              <div id="cardSection" class="payment-method" style="display: none;">
-                <div class="alert alert-warning">
-                  <i class="fas fa-credit-card me-2"></i>
-                  Secure card payment processing
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold">Card Number</label>
-                  <input type="text" name="card_number" class="form-control" 
-                         pattern="[0-9]{13,16}" placeholder="4242 4242 4242 4242">
-                </div>
-                
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Expiry Date</label>
-                    <input type="text" name="expiry" class="form-control" 
-                           pattern="(0[1-9]|1[0-2])\/[0-9]{2}" placeholder="MM/YY">
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">CVC</label>
-                    <input type="text" name="cvc" class="form-control" 
-                           pattern="[0-9]{3,4}" placeholder="123">
-                  </div>
-                </div>
-              </div>
-    
-              <div class="mb-3">
-                <label class="form-label fw-bold">Donation Purpose</label>
-                <select name="purpose" class="form-select">
-                  <option value="General Donation">General Donation</option>
-                  <option value="Medical Equipment">Medical Equipment</option>
-                  <option value="Patient Support">Patient Support</option>
+
+            <!-- Personal Details (Always Visible) -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">Full Name</label>
+              <input type="text" name="full_name" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Email Address</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Phone Number</label>
+              <input type="tel" name="phone" class="form-control" required>
+            </div>
+
+            <!-- Donation Details -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">Donation Amount</label>
+              <div class="input-group">
+                <select name="currency" class="form-select" id="currencySelect" required style="max-width: 150px;">
+                  <option value="KES" selected>KES</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
                 </select>
+                <input type="number" name="amount" class="form-control" required step="0.01" min="1"
+                  placeholder="Enter amount">
               </div>
             </div>
-    
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-success">
-                <i class="fas fa-lock me-2"></i>
-                Complete Donation
-              </button>
+
+            <!-- Payment Method Sections -->
+            <div id="mpesaSection" class="payment-method">
+              <div class="alert alert-warning">
+                <i class="fas fa-mobile-alt me-2"></i>
+                You will receive an M-Pesa prompt on your phone
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">M-Pesa Number</label>
+                <input type="tel" name="mpesa_number" class="form-control" pattern="[0-9]{10}"
+                  title="Enter 10-digit M-Pesa number (e.g., 07XXXXXXXX)">
+              </div>
             </div>
-          </form>
-        </div>
+
+            <div id="cardSection" class="payment-method" style="display: none;">
+              <div class="alert alert-warning">
+                <i class="fas fa-credit-card me-2"></i>
+                Secure card payment processing
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">Card Number</label>
+                <input type="text" name="card_number" class="form-control" pattern="[0-9]{13,16}"
+                  placeholder="4242 4242 4242 4242">
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-bold">Expiry Date</label>
+                  <input type="text" name="expiry" class="form-control" pattern="(0[1-9]|1[0-2])\/[0-9]{2}"
+                    placeholder="MM/YY">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-bold">CVC</label>
+                  <input type="text" name="cvc" class="form-control" pattern="[0-9]{3,4}" placeholder="123">
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Donation Purpose</label>
+              <select name="purpose" class="form-select">
+                <option value="General Donation">General Donation</option>
+                <option value="Medical Equipment">Medical Equipment</option>
+                <option value="Patient Support">Patient Support</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-success">
+              <i class="fas fa-lock me-2"></i>
+              Complete Donation
+            </button>
+          </div>
+        </form>
       </div>
-    </div>    
-    <style>
+    </div>
+  </div>
+  <style>
     .payment-method {
-        border: 1px solid #dee2e6;
-        border-radius: 5px;
-        padding: 15px;
-        margin-bottom: 20px;
-        background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 20px;
+      background: #f8f9fa;
     }
-    </style>
-    <script src="{% static 'clinicapp/js/jquery.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery-migrate-3.0.1.min.js' %}"></script>
-    <!-- <script src="{% static 'clinicapp/js/popper.min.js' %}"></script> -->
-    <!-- <script src="{% static 'clinicapp/js/bootstrap.min.js' %}"></script> -->
-    <script src="{% static 'clinicapp/js/jquery.easing.1.3.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery.waypoints.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery.magnific-popup.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/aos.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery.animateNumber.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/bootstrap-datepicker.js' %}"></script>
-    <script src="{% static 'clinicapp/js/jquery.timepicker.min.js' %}"></script>
-    <script src="{% static 'clinicapp/js/scrollax.min.js' %}"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
-    <script src="{% static 'clinicapp/js/google-map.js' %}"></script>
-    <script src="{% static 'clinicapp/js/main.js' %}"></script>
-    <!-- Add before closing body -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </style>
+  <script src="{% static 'clinicapp/js/jquery.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <!-- <script src="{% static 'clinicapp/js/popper.min.js' %}"></script> -->
+  <!-- <script src="{% static 'clinicapp/js/bootstrap.min.js' %}"></script> -->
+  <script src="{% static 'clinicapp/js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/aos.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'clinicapp/js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'clinicapp/js/scrollax.min.js' %}"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+  <script src="{% static 'clinicapp/js/google-map.js' %}"></script>
+  <script src="{% static 'clinicapp/js/main.js' %}"></script>
+  <!-- Add before closing body -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
-    <script>
-      // Initialize Bootstrap Modal
-      const donationModal = new bootstrap.Modal(document.getElementById('pesapalPaymentModal'));
-      
-      // Currency Selection Handler
-      document.getElementById('currencySelect').addEventListener('change', function() {
-        const mpesaSection = document.getElementById('mpesaSection');
-        const cardSection = document.getElementById('cardSection');
-        
-        // Toggle visibility based on currency
-        if (this.value === 'KES') {
-          mpesaSection.style.display = 'block';
-          cardSection.style.display = 'none';
-          setMpesaValidation(true);
-          setCardValidation(false);
-        } else {
-          mpesaSection.style.display = 'none';
-          cardSection.style.display = 'block';
-          setMpesaValidation(false);
-          setCardValidation(true);
+  <script>
+    // Initialize Bootstrap Modal
+    const donationModal = new bootstrap.Modal(document.getElementById('pesapalPaymentModal'));
+
+    // Currency Selection Handler
+    document.getElementById('currencySelect').addEventListener('change', function () {
+      const mpesaSection = document.getElementById('mpesaSection');
+      const cardSection = document.getElementById('cardSection');
+
+      // Toggle visibility based on currency
+      if (this.value === 'KES') {
+        mpesaSection.style.display = 'block';
+        cardSection.style.display = 'none';
+        setMpesaValidation(true);
+        setCardValidation(false);
+      } else {
+        mpesaSection.style.display = 'none';
+        cardSection.style.display = 'block';
+        setMpesaValidation(false);
+        setCardValidation(true);
+      }
+    });
+
+    // Form Validation Handler
+    document.getElementById('donationForm').addEventListener('submit', function (e) {
+      const currency = document.getElementById('currencySelect').value;
+      let isValid = true;
+
+      if (currency === 'KES') {
+        if (!validateMpesaFields()) {
+          isValid = false;
+          showValidationError('Please enter a valid M-Pesa number');
         }
-      });
-      
-      // Form Validation Handler
-      document.getElementById('donationForm').addEventListener('submit', function(e) {
-        const currency = document.getElementById('currencySelect').value;
-        let isValid = true;
-      
-        if (currency === 'KES') {
-          if (!validateMpesaFields()) {
-            isValid = false;
-            showValidationError('Please enter a valid M-Pesa number');
-          }
-        } else {
-          if (!validateCardFields()) {
-            isValid = false;
-            showValidationError('Please complete all card details');
-          }
+      } else {
+        if (!validateCardFields()) {
+          isValid = false;
+          showValidationError('Please complete all card details');
         }
-      
-        if (!isValid) {
-          e.preventDefault();
-          donationModal.show(); // Keep modal open on error
-        }
-      });
-      
-      // Validation Functions
-      function validateMpesaFields() {
-        const mpesaInput = document.querySelector('[name="mpesa_number"]');
-        return mpesaInput.value.match(/^07\d{8}$/);
       }
-      
-      function validateCardFields() {
-        const cardNumber = document.querySelector('[name="card_number"]').value;
-        const expiry = document.querySelector('[name="expiry"]').value;
-        const cvc = document.querySelector('[name="cvc"]').value;
-        
-        return cardNumber.match(/^\d{13,16}$/) && 
-               expiry.match(/^(0[1-9]|1[0-2])\/\d{2}$/) && 
-               cvc.match(/^\d{3,4}$/);
+
+      if (!isValid) {
+        e.preventDefault();
+        donationModal.show(); // Keep modal open on error
       }
-      
-      function setMpesaValidation(required) {
-        const fields = document.querySelectorAll('#mpesaSection [required]');
-        fields.forEach(field => field.required = required);
-      }
-      
-      function setCardValidation(required) {
-        const fields = document.querySelectorAll('#cardSection [required]');
-        fields.forEach(field => field.required = required);
-      }
-      
-      function showValidationError(message) {
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'alert alert-danger mt-3';
-        errorDiv.innerHTML = `
+    });
+
+    // Validation Functions
+    function validateMpesaFields() {
+      const mpesaInput = document.querySelector('[name="mpesa_number"]');
+      return mpesaInput.value.match(/^07\d{8}$/);
+    }
+
+    function validateCardFields() {
+      const cardNumber = document.querySelector('[name="card_number"]').value;
+      const expiry = document.querySelector('[name="expiry"]').value;
+      const cvc = document.querySelector('[name="cvc"]').value;
+
+      return cardNumber.match(/^\d{13,16}$/) &&
+        expiry.match(/^(0[1-9]|1[0-2])\/\d{2}$/) &&
+        cvc.match(/^\d{3,4}$/);
+    }
+
+    function setMpesaValidation(required) {
+      const fields = document.querySelectorAll('#mpesaSection [required]');
+      fields.forEach(field => field.required = required);
+    }
+
+    function setCardValidation(required) {
+      const fields = document.querySelectorAll('#cardSection [required]');
+      fields.forEach(field => field.required = required);
+    }
+
+    function showValidationError(message) {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'alert alert-danger mt-3';
+      errorDiv.innerHTML = `
           <i class="fas fa-exclamation-circle me-2"></i>
           ${message}
         `;
-        
-        const existingError = document.querySelector('.alert-danger');
-        if (existingError) existingError.remove();
-        
-        document.querySelector('#donationForm').prepend(errorDiv);
+
+      const existingError = document.querySelector('.alert-danger');
+      if (existingError) existingError.remove();
+
+      document.querySelector('#donationForm').prepend(errorDiv);
+    }
+
+    // Initialize default state
+    document.addEventListener('DOMContentLoaded', function () {
+      // Set initial state
+      const currencySelect = document.getElementById('currencySelect');
+      currencySelect.dispatchEvent(new Event('change'));
+
+      // Add click handler for donate buttons
+      document.querySelectorAll('[data-bs-target="#pesapalPaymentModal"]').forEach(button => {
+        button.addEventListener('click', () => donationModal.show());
+      });
+    });
+  </script>
+
+  <!-- Script for "Read More" functionality -->
+  <script>
+    document.querySelectorAll(".read-more").forEach((button) => {
+      button.addEventListener("click", function () {
+        const card = this.closest(".staff");
+        const bioShort = card.querySelector(".bio-short");
+        const bioFull = card.querySelector(".bio-full");
+
+        if (bioShort.style.display === "none") {
+          bioShort.style.display = "block";
+          bioFull.style.display = "none";
+          this.textContent = "Read More";
+        } else {
+          bioShort.style.display = "none";
+          bioFull.style.display = "block";
+          this.textContent = "Read Less";
+        }
+      });
+    });
+  </script>
+
+  <!-- script for auto-fading alerts -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(function () {
+        const alerts = document.querySelectorAll(".alert");
+        alerts.forEach(function (alert) {
+          alert.classList.remove("show");
+          alert.classList.add("fade");
+          setTimeout(() => {
+            alert.remove();
+            const alertContainer = document.querySelector(".container.mt-3");
+            if (alertContainer && alertContainer.querySelectorAll(".alert").length === 0) {
+              alertContainer.remove();
+            }
+          }, 500);
+        });
+      }, 4000);
+    });
+  </script>
+
+  <script>
+    // Initialize date pickers
+    flatpickr("input[type='date']", {
+      dateFormat: "Y-m-d",
+      // Custom styling matches your department dropdown
+      altInput: true,
+      altFormat: "F j, Y",
+      theme: "light", // You can also create custom themes
+    });
+
+    // Initialize time pickers
+    flatpickr("input[type='time']", {
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: "H:i",
+      time_24hr: true,
+    });
+  </script>
+
+  <!-- Script for WhatsApp functionality -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Get elements
+      const whatsappButton = document.getElementById("whatsappButton");
+      const whatsappPopup = document.getElementById("whatsappPopup");
+      const closeButton = document.querySelector(".whatsapp-close");
+      const startChatButton = document.getElementById("startChatButton");
+
+      // Open popup when WhatsApp button is clicked
+      if (whatsappButton) {
+        whatsappButton.addEventListener("click", () => {
+          whatsappPopup.style.display = "block";
+        });
       }
-      
-      // Initialize default state
-      document.addEventListener('DOMContentLoaded', function() {
-        // Set initial state
-        const currencySelect = document.getElementById('currencySelect');
-        currencySelect.dispatchEvent(new Event('change'));
-        
-        // Add click handler for donate buttons
-        document.querySelectorAll('[data-bs-target="#pesapalPaymentModal"]').forEach(button => {
-          button.addEventListener('click', () => donationModal.show());
+
+      // Close popup when close button is clicked
+      if (closeButton) {
+        closeButton.addEventListener("click", () => {
+          whatsappPopup.style.display = "none";
         });
-      });
-      </script>
+      }
 
-    <!-- Script for "Read More" functionality -->
-    <script>
-      document.querySelectorAll(".read-more").forEach((button) => {
-        button.addEventListener("click", function () {
-          const card = this.closest(".staff");
-          const bioShort = card.querySelector(".bio-short");
-          const bioFull = card.querySelector(".bio-full");
+      // Redirect to WhatsApp Web when Start Chat button is clicked
+      if (startChatButton) {
+        startChatButton.addEventListener("click", () => {
+          const phoneNumber = "254116400152"; // WhatsApp number
+          const message =
+            "Hello, I would like to chat with The Koru Mission Hospital.";
 
-          if (bioShort.style.display === "none") {
-            bioShort.style.display = "block";
-            bioFull.style.display = "none";
-            this.textContent = "Read More";
+          // Detect if user is on mobile or desktop
+          const isMobile = /iPhone|Android|iPad/i.test(navigator.userAgent);
+          let whatsappUrl;
+
+          if (isMobile) {
+            // Use mobile-friendly WhatsApp link
+            whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+              message
+            )}`;
           } else {
-            bioShort.style.display = "none";
-            bioFull.style.display = "block";
-            this.textContent = "Read Less";
+            // Use direct WhatsApp Web link for desktop users
+            whatsappUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
+              message
+            )}`;
           }
-        });
-      });
-    </script>
 
-    <!-- script for auto-fading alerts -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        setTimeout(function () {
-          const alerts = document.querySelectorAll(".alert");
-          alerts.forEach(function (alert) {
-            alert.classList.remove("show");
-            alert.classList.add("fade");
-            setTimeout(() => {
-              alert.remove();
-              const alertContainer = document.querySelector(".container.mt-3");
-              if (alertContainer && alertContainer.querySelectorAll(".alert").length === 0) {
-                alertContainer.remove();
-              }
-            }, 500);
-          });
-        }, 4000);
-      });
-    </script>
+          // Open WhatsApp chat in a new tab
+          const newTab = window.open(whatsappUrl, "_blank");
 
-    <script>
-      // Initialize date pickers
-      flatpickr("input[type='date']", {
-        dateFormat: "Y-m-d",
-        // Custom styling matches your department dropdown
-        altInput: true,
-        altFormat: "F j, Y",
-        theme: "light", // You can also create custom themes
-      });
-
-      // Initialize time pickers
-      flatpickr("input[type='time']", {
-        enableTime: true,
-        noCalendar: true,
-        dateFormat: "H:i",
-        time_24hr: true,
-      });
-    </script>
-
-    <!-- Script for WhatsApp functionality -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Get elements
-        const whatsappButton = document.getElementById("whatsappButton");
-        const whatsappPopup = document.getElementById("whatsappPopup");
-        const closeButton = document.querySelector(".whatsapp-close");
-        const startChatButton = document.getElementById("startChatButton");
-
-        // Open popup when WhatsApp button is clicked
-        if (whatsappButton) {
-          whatsappButton.addEventListener("click", () => {
-            whatsappPopup.style.display = "block";
-          });
-        }
-
-        // Close popup when close button is clicked
-        if (closeButton) {
-          closeButton.addEventListener("click", () => {
-            whatsappPopup.style.display = "none";
-          });
-        }
-
-        // Redirect to WhatsApp Web when Start Chat button is clicked
-        if (startChatButton) {
-          startChatButton.addEventListener("click", () => {
-            const phoneNumber = "254116400152"; // WhatsApp number
-            const message =
-              "Hello, I would like to chat with The Koru Mission Hospital.";
-
-            // Detect if user is on mobile or desktop
-            const isMobile = /iPhone|Android|iPad/i.test(navigator.userAgent);
-            let whatsappUrl;
-
-            if (isMobile) {
-              // Use mobile-friendly WhatsApp link
-              whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-                message
-              )}`;
-            } else {
-              // Use direct WhatsApp Web link for desktop users
-              whatsappUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
-                message
-              )}`;
-            }
-
-            // Open WhatsApp chat in a new tab
-            const newTab = window.open(whatsappUrl, "_blank");
-
-            // If popup is blocked, open in the same tab
-            if (!newTab) {
-              window.location.href = whatsappUrl;
-            }
-
-            // Close popup after redirecting
-            whatsappPopup.style.display = "none";
-          });
-        }
-
-        // Close popup if user clicks outside the modal
-        window.addEventListener("click", (event) => {
-          if (event.target === whatsappPopup) {
-            whatsappPopup.style.display = "none";
+          // If popup is blocked, open in the same tab
+          if (!newTab) {
+            window.location.href = whatsappUrl;
           }
+
+          // Close popup after redirecting
+          whatsappPopup.style.display = "none";
         });
+      }
+
+      // Close popup if user clicks outside the modal
+      window.addEventListener("click", (event) => {
+        if (event.target === whatsappPopup) {
+          whatsappPopup.style.display = "none";
+        }
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>
