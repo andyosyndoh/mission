@@ -17,6 +17,8 @@ urlpatterns = [
     path('careers/', include('careers.urls', namespace='careers')),
     # Corrected sitemap configuration 👇
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+    path('donations/', include('donations.urls')),
+    path('', include('clinicapp.urls')),  # Assuming clinicapp has your home view
 ]
 
 if settings.DEBUG:
