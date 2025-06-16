@@ -55,9 +55,10 @@ class PesapalGateway:
                 "last_name": order_data['last_name']
             }
         }
+        print("Sending to Pesapal:", json.dumps(payload, indent=2))
 
         logger.debug(f"Order payload: {json.dumps(payload, indent=2)}")
-        
+
         headers = {
             "Authorization": f"Bearer {self.token}",
             "Content-Type": "application/json",
@@ -84,6 +85,7 @@ class PesapalGateway:
         
         try:
             response = requests.get(status_url, headers=headers)
+            print("Pesapal Response:", response.status_code, response.text)
             response.raise_for_status()
             return response.json().get('payment_status', 'pending').lower()
         except Exception as e:
