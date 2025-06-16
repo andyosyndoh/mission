@@ -36,7 +36,7 @@ class Command(BaseCommand):
             
             payload = {
                 # "url": settings.PESAPAL_IPN_URL + f"?v={int(time.time())}",
-                "url": "https://a485-197-232-62-137.ngrok-free.app/payment/ipn/",
+                "url": "https://korumissionhospital.co.ke/payment/ipn/",
                 "ipn_notification_type": "POST"
             }
             
