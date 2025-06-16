@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security settings
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-dev')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'korumissionhospital.co.ke', 'www.korumissionhospital.co.ke']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'korumissionhospital.co.ke', 'www.korumissionhospital.co.ke', 'a485-197-232-62-137.ngrok-free.app']
 
 # Application definition
 INSTALLED_APPS = [
