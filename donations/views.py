@@ -42,6 +42,10 @@ def initiate_donation(request):
 
             # Get Pesapal redirect URL
             redirect_url = pesapal.create_order(order_data)
+            if not redirect_url:
+                logger.error("Pesapal did not return a redirect_url.")
+                return redirect("donation_failed")
+            
             return redirect(redirect_url)
 
         except Exception as e:

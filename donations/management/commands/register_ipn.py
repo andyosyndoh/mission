@@ -3,6 +3,8 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 import requests
 import json
+import time
+
 
 class Command(BaseCommand):
     help = 'Register IPN URL with Pesapal'
@@ -33,7 +35,8 @@ class Command(BaseCommand):
             )
             
             payload = {
-                "url": settings.PESAPAL_IPN_URL,
+                # "url": settings.PESAPAL_IPN_URL + f"?v={int(time.time())}",
+                "url": "https://a485-197-232-62-137.ngrok-free.app/payment/ipn/",
                 "ipn_notification_type": "POST"
             }
             
@@ -41,6 +44,9 @@ class Command(BaseCommand):
                 "Authorization": f"Bearer {token}",
                 "Content-Type": "application/json"
             }
+            
+            self.stdout.write(self.style.WARNING(f"Sending to: {ipn_url}"))
+            self.stdout.write(self.style.WARNING(f"Payload: {json.dumps(payload, indent=2)}"))
             
             response = requests.post(ipn_url, json=payload, headers=headers)
             response.raise_for_status()
@@ -50,4 +56,6 @@ class Command(BaseCommand):
             self.stdout.write(f'PESAPAL_IPN_ID={ipn_data["ipn_id"]}')
 
         except Exception as e:
+            self.stdout.write(self.style.ERROR(f'Status Code: {e.response.status_code}'))
+            self.stdout.write(self.style.ERROR(f'Response: {e.response.text}'))
             self.stdout.write(self.style.ERROR(f'IPN registration failed: {str(e)}'))
